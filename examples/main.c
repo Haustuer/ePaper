@@ -126,14 +126,7 @@ int main(int argc, char *argv[])
 
 
 
-#if(USE_Normal_Demo)
-    //Show 16 grayscale
-    Display_ColorPalette_Example(Panel_Width, Panel_Height, Init_Target_Memory_Addr);
-	EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, GC16_Mode);
-
-    //Show some character and pattern
-    Display_CharacterPattern_Example(Panel_Width, Panel_Height, Init_Target_Memory_Addr, BitsPerPixel_4);
-    EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, GC16_Mode);
+#if(USE_Normal_Demo)   
 
     //Show a bmp file
     //1bp use A2 mode by default, before used it, refresh the screen with WHITE
@@ -142,7 +135,7 @@ int main(int argc, char *argv[])
     Display_BMP_Example(Panel_Width, Panel_Height, Init_Target_Memory_Addr, BitsPerPixel_4);
     EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, GC16_Mode);
     
-    //Show A2 mode refresh effect
+   /* //Show A2 mode refresh effect
     EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, A2_Mode);
     Dynamic_Refresh_Example(Dev_Info,Init_Target_Memory_Addr);
     EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, A2_Mode);
@@ -158,14 +151,7 @@ int main(int argc, char *argv[])
     EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, A2_Mode);
     Check_FrameRate_Example(800, 600, Init_Target_Memory_Addr, BitsPerPixel_1);
     EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, A2_Mode);
-    EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, GC16_Mode);
-#endif
-
-
-#if(USE_Touch_Panel)
-    //show a simple demo for hand-painted tablet, only support for <6inch HD touch e-Paper> at present
-    EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, INIT_Mode);
-    TouchPanel_ePaper_Example(Panel_Width, Panel_Height, Init_Target_Memory_Addr);
+    EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, GC16_Mode);*/
 #endif
 
     //We recommended refresh the panel to white color before storing in the warehouse.
