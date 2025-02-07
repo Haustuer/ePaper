@@ -93,11 +93,6 @@ int main(int argc, char *argv[])
     Debug("Display mode:%d\r\n", epd_mode);
     Dev_Info = EPD_IT8951_Init(VCOM);
 
-#if(Enhance)
-    Debug("Attention! Enhanced driving ability, only used when the screen is blurred\r\n");
-    Enhance_Driving_Capability();
-#endif
-
     //get some important info from Dev_Info structure
     Panel_Width = Dev_Info.Panel_W;
     Panel_Height = Dev_Info.Panel_H;
@@ -128,12 +123,7 @@ int main(int argc, char *argv[])
 
 	EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, INIT_Mode);
 
-#if(USE_Factory_Test)
-	if(epd_mode == 3) 	// Color Test
-		Color_Test(Dev_Info, Init_Target_Memory_Addr);
-    else				// Normal Test
-		Factory_Test_Only(Dev_Info, Init_Target_Memory_Addr);
-#endif
+
 
 
 #if(USE_Normal_Demo)
