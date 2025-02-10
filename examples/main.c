@@ -5,15 +5,15 @@
 #include <math.h>
 
 #include <stdlib.h>     //exit()
+/*  TEst with new libs*/
 #include <signal.h>     //signal()
+#include <stdio.h>
+#include <string.h>	//strlen
+#include <sys/socket.h>
+#include <arpa/inet.h>	//inet_addr
+/* */
 
-#define Enhance false
 
-#define USE_Factory_Test false
-
-#define USE_Normal_Demo true
-
-#define USE_Touch_Panel false
 
 UWORD VCOM = 2510;
 
@@ -98,27 +98,11 @@ int main(int argc, char *argv[])
     Panel_Height = Dev_Info.Panel_H;
     Init_Target_Memory_Addr = Dev_Info.Memory_Addr_L | (Dev_Info.Memory_Addr_H << 16);
     char* LUT_Version = (char*)Dev_Info.LUT_Version;
-    if( strcmp(LUT_Version, "M641") == 0 ){
-        //6inch e-Paper HAT(800,600), 6inch HD e-Paper HAT(1448,1072), 6inch HD touch e-Paper HAT(1448,1072)
-        A2_Mode = 4;
-        Four_Byte_Align = true;
-    }else if( strcmp(LUT_Version, "M841_TFAB512") == 0 ){
-        //Another firmware version for 6inch HD e-Paper HAT(1448,1072), 6inch HD touch e-Paper HAT(1448,1072)
-        A2_Mode = 6;
-        Four_Byte_Align = true;
-    }else if( strcmp(LUT_Version, "M841") == 0 ){
-        //9.7inch e-Paper HAT(1200,825)
-        A2_Mode = 6;
-    }else if( strcmp(LUT_Version, "M841_TFA2812") == 0 ){
-        //7.8inch e-Paper HAT(1872,1404)
-        A2_Mode = 6;
-    }else if( strcmp(LUT_Version, "M841_TFA5210") == 0 ){
+   
+    //}else if( strcmp(LUT_Version, "M841_TFA5210") == 0 ){
         //10.3inch e-Paper HAT(1872,1404)
         A2_Mode = 6;
-    }else{
-        //default set to 6 as A2 Mode
-        A2_Mode = 6;
-    }
+    
     Debug("A2 Mode:%d\r\n", A2_Mode);
 
 	EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, INIT_Mode);
@@ -126,7 +110,7 @@ int main(int argc, char *argv[])
 
 
 
-#if(USE_Normal_Demo)   
+
 
     //Show a bmp file
     //1bp use A2 mode by default, before used it, refresh the screen with WHITE
@@ -134,6 +118,8 @@ int main(int argc, char *argv[])
     Display_BMP_Example(Panel_Width, Panel_Height, Init_Target_Memory_Addr, BitsPerPixel_2);
     Display_BMP_Example(Panel_Width, Panel_Height, Init_Target_Memory_Addr, BitsPerPixel_4);
     EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, GC16_Mode);
+
+
     
    /* //Show A2 mode refresh effect
     EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, A2_Mode);
@@ -152,7 +138,7 @@ int main(int argc, char *argv[])
     Check_FrameRate_Example(800, 600, Init_Target_Memory_Addr, BitsPerPixel_1);
     EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, A2_Mode);
     EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, GC16_Mode);*/
-#endif
+
 
     //We recommended refresh the panel to white color before storing in the warehouse.
     EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, INIT_Mode);
