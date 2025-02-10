@@ -15,6 +15,20 @@
 
 
 /* */
+#include <curl/curl.h>
+
+size_t WriteCallback(void *contents, size_t size, size_t nmemb, std::string *s) {
+    size_t newLength = size * nmemb;
+    try {
+        s->append((char*)contents, newLength);
+    } catch(std::bad_alloc &e) {
+        return 0;
+        ;
+    }
+    return newLength;
+}
+
+/*   tghjis is a vcurl funkion on top*/
 
 UWORD VCOM = 1520;
 IT8951_Dev_Info Dev_Info = {0, 0};
@@ -85,6 +99,30 @@ int main(int argc, char *argv[])
 
 
 
+    CURL *curl;
+    CURLcode res;
+    std::string readBuffer;
+
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    curl = curl_easy_init();
+    if(curl) {
+        curl_easy_setopt(curl, CURLOPT_URL, "http://192.168.1.84");
+        curl_easy_setopt(curl, CURLOPT_PORT, 80);  // Set the port number here
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+        res = curl_easy_perform(curl);
+        if(res != CURLE_OK) {
+            std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << std::endl;
+        } else {
+            std::cout << "Response: " << readBuffer << std::endl;
+        }
+        curl_easy_cleanup(curl);
+    }
+    curl_global_cleanup();
+
+
+
+
 
 
 
@@ -96,7 +134,7 @@ int main(int argc, char *argv[])
     EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, GC16_Mode);
 
 
-  
+  /*
 
     int socket_desc;
 	struct sockaddr_in server;
@@ -133,7 +171,7 @@ int main(int argc, char *argv[])
 	puts("Reply received\n");
 	puts(server_reply);
     
-
+*/
     
    /* //Show A2 mode refresh effect
     EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, A2_Mode);
