@@ -114,7 +114,7 @@ int main(int argc, char *argv[])
 
 	EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, INIT_Mode);
 
-
+/*
 
 
     // Initialize the curl library
@@ -148,7 +148,7 @@ int main(int argc, char *argv[])
   curl_global_cleanup();
 
 
-
+*/
 
 
 
