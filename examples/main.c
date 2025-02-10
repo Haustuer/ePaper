@@ -70,14 +70,14 @@ int main(int argc, char *argv[])
     if (argc < 2){
         Debug("Please input VCOM value on FPC cable!\r\n");
         Debug("Example: sudo ./epd -2.51\r\n");
-        exit(1);
+      //  exit(1);
     }
 	if (argc != 3){
 		Debug("Please input e-Paper display mode!\r\n");
 		Debug("Example: sudo ./epd -2.51 0 or sudo ./epd -2.51 1\r\n");
 		Debug("Now, 10.3 inch glass panle is mode1, else is mode0\r\n");
 		Debug("If you don't know what to type in just type 0 \r\n");
-		exit(1);
+	//	exit(1);
     }
 
     //Init the BCM2835 Device
