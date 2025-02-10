@@ -106,9 +106,9 @@ int main(int argc, char *argv[])
 	socket_desc = socket(AF_INET , SOCK_STREAM , 0);
 	if (socket_desc == -1) Debug("Could not create socket");
 		
-	server.sin_addr.s_addr = inet_addr("127.0.0.1/shipsList");
+	server.sin_addr.s_addr = inet_addr("127.0.0.1");
 	server.sin_family = AF_INET;
-	server.sin_port = htons( 443 );
+	server.sin_port = htons( 80 );
 
 	//Connect to remote server
 	if (connect(socket_desc , (struct sockaddr *)&server , sizeof(server)) < 0){
