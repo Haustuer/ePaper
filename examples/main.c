@@ -15,18 +15,37 @@
 
 
 /* */
-#include <curl/curl.h>
+struct string {
+    char *ptr;
+    size_t len;
+};
 
-size_t WriteCallback(void *contents, size_t size, size_t nmemb, std::string *s) {
-    size_t newLength = size * nmemb;
-    try {
-        s->append((char*)contents, newLength);
-    } catch(std::bad_alloc &e) {
-        return 0;
-        ;
+void init_string(struct string *s) {
+    s->len = 0;
+    s->ptr = malloc(s->len + 1);
+    if (s->ptr == NULL) {
+        fprintf(stderr, "malloc() failed\n");
+        exit(EXIT_FAILURE);
     }
-    return newLength;
+    s->ptr[0] = '\0';
 }
+
+size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp) {
+    size_t total_size = size * nmemb;
+    struct string *s = (struct string *)userp;
+
+    char *ptr = realloc(s->ptr, s->len + total_size + 1);
+    if (ptr == NULL) {
+        fprintf(stderr, "realloc() failed\n");
+        return 0;
+    }
+    s->ptr = ptr;
+    memcpy(&(s->ptr[s->len]), contents, total_size);
+    s->len += total_size;
+    s->ptr[s->len] = '\0';
+
+    return total_size;
+
 
 /*   tghjis is a vcurl funkion on top*/
 
@@ -98,10 +117,11 @@ int main(int argc, char *argv[])
 
 
 
-
     CURL *curl;
     CURLcode res;
-    std::string readBuffer;
+    struct string s;
+    
+    init_string(&s);
 
     curl_global_init(CURL_GLOBAL_DEFAULT);
     curl = curl_easy_init();
@@ -109,14 +129,15 @@ int main(int argc, char *argv[])
         curl_easy_setopt(curl, CURLOPT_URL, "http://192.168.1.84");
         curl_easy_setopt(curl, CURLOPT_PORT, 80);  // Set the port number here
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &s);
         res = curl_easy_perform(curl);
         if(res != CURLE_OK) {
-            std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << std::endl;
+            fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
         } else {
-            std::cout << "Response: " << readBuffer << std::endl;
+            printf("Response: %s\n", s.ptr);
         }
         curl_easy_cleanup(curl);
+        free(s.ptr);
     }
     curl_global_cleanup();
 
