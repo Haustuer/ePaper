@@ -13,18 +13,12 @@
 #include <arpa/inet.h>	//inet_addr
 /* */
 
-
-
 UWORD VCOM = 1520;
-
 IT8951_Dev_Info Dev_Info = {0, 0};
 UWORD Panel_Width;
 UWORD Panel_Height;
 UDOUBLE Init_Target_Memory_Addr;
-int epd_mode = 1;	//0: no rotate, no mirror
-					//1: no rotate, horizontal mirror, for 10.3inch
-					//2: no totate, horizontal mirror, for 5.17inch
-					//3: no rotate, no mirror, isColor, for 6inch color
+int epd_mode = 1;	//1: no rotate, horizontal mirror, for 10.3inch
 					
 void  Handler(int signo){
     Debug("\r\nHandler:exit\r\n");
@@ -65,31 +59,13 @@ void  Handler(int signo){
 int main(int argc, char *argv[])
 {
     //Exception handling:ctrl + c
-    signal(SIGINT, Handler);
-
-    if (argc < 2){
-        Debug("Please input VCOM value on FPC cable!\r\n");
-        Debug("Example: sudo ./epd -2.51\r\n");
-      //  exit(1);
-    }
-	if (argc != 3){
-		Debug("Please input e-Paper display mode!\r\n");
-		Debug("Example: sudo ./epd -2.51 0 or sudo ./epd -2.51 1\r\n");
-		Debug("Now, 10.3 inch glass panle is mode1, else is mode0\r\n");
-		Debug("If you don't know what to type in just type 0 \r\n");
-	//	exit(1);
-    }
+    signal(SIGINT, Handler);  
 
     //Init the BCM2835 Device
     if(DEV_Module_Init()!=0){
         return -1;
-    }
-
-    double temp;
-    //sscanf(argv[1],"%lf",&temp);
-    //VCOM = (UWORD)(fabs(temp)*1000);
-    Debug("VCOM value:%d\r\n", VCOM);
-	//sscanf(argv[2],"%d",&epd_mode);
+    }    
+    Debug("VCOM value:%d\r\n", VCOM);	
     Debug("Display mode:%d\r\n", epd_mode);
     Dev_Info = EPD_IT8951_Init(VCOM);
 
@@ -97,19 +73,10 @@ int main(int argc, char *argv[])
     Panel_Width = Dev_Info.Panel_W;
     Panel_Height = Dev_Info.Panel_H;
     Init_Target_Memory_Addr = Dev_Info.Memory_Addr_L | (Dev_Info.Memory_Addr_H << 16);
-    char* LUT_Version = (char*)Dev_Info.LUT_Version;
-   
-    //}else if( strcmp(LUT_Version, "M841_TFA5210") == 0 ){
-        //10.3inch e-Paper HAT(1872,1404)
-        A2_Mode = 6;
-    
+    A2_Mode = 6;    
     Debug("A2 Mode:%d\r\n", A2_Mode);
 
 	EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, INIT_Mode);
-
-
-
-
 
 
     //Show a bmp file
@@ -118,6 +85,43 @@ int main(int argc, char *argv[])
     Display_BMP_Example(Panel_Width, Panel_Height, Init_Target_Memory_Addr, BitsPerPixel_2);
     Display_BMP_Example(Panel_Width, Panel_Height, Init_Target_Memory_Addr, BitsPerPixel_4);
     EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, GC16_Mode);
+
+
+
+    int socket_desc;
+	struct sockaddr_in server;
+	char *message , server_reply[2000];
+	
+	//Create socket
+	socket_desc = socket(AF_INET , SOCK_STREAM , 0);
+	if (socket_desc == -1) Debug("Could not create socket");
+		
+	server.sin_addr.s_addr = inet_addr("127.0.0.1");
+	server.sin_family = AF_INET;
+	server.sin_port = htons( 80 );
+
+	//Connect to remote server
+	if (connect(socket_desc , (struct sockaddr *)&server , sizeof(server)) < 0){
+		puts("connect error");
+		return 1;
+	}
+	
+	puts("Connected\n");
+	
+	//Send some data
+	message = "GET / HTTP/1.1\r\n\r\n";
+	if( send(socket_desc , message , strlen(message) , 0) < 0){
+		puts("Send failed");
+		return 1;
+	}
+	puts("Data Send\n");
+	
+	//Receive a reply from the server
+	if (recv(socket_desc, server_reply , 2000 , 0) < 0){
+		puts("recv failed");
+	}
+	puts("Reply received\n");
+	puts(server_reply);
 
 
     
