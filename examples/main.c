@@ -14,7 +14,7 @@
 /* */
 <curl/curl.h>
 
-/* */
+/* 
 struct string {
     char *ptr;
     size_t len;
@@ -117,30 +117,35 @@ int main(int argc, char *argv[])
 
 
 
-    CURL *curl;
-    CURLcode res;
-    struct string s;
-    
-    init_string(&s);
-
-    curl_global_init(CURL_GLOBAL_DEFAULT);
-    curl = curl_easy_init();
-    if(curl) {
-        curl_easy_setopt(curl, CURLOPT_URL, "http://192.168.1.84");
-        curl_easy_setopt(curl, CURLOPT_PORT, 80);  // Set the port number here
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &s);
-        res = curl_easy_perform(curl);
-        if(res != CURLE_OK) {
-            fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
-        } else {
-            printf("Response: %s\n", s.ptr);
-        }
-        curl_easy_cleanup(curl);
-        free(s.ptr);
-    }
-    curl_global_cleanup();
-
+    // Initialize the curl library
+  curl_global_init(CURL_GLOBAL_DEFAULT);
+  // Create a curl handle
+  CURL *handle = curl_easy_init();
+  // Set the URL to request
+  curl_easy_setopt(handle, CURLOPT_URL, "http://127.0.0.1");
+  // Set the callback function to handle the response
+  curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, [](char *data, size_t size, size_t nmemb, void *userp) {
+    // Cast the user pointer to an ostream and write the data to it
+    *static_cast<std::ostream*>(userp) << data;
+    // Return the number of bytes processed
+    return size * nmemb;
+  });
+  // Set the user pointer to be an ostream to which the response will be written
+  std::ostringstream response;
+  curl_easy_setopt(handle, CURLOPT_WRITEDATA, &response);
+  // Perform the request
+  CURLcode result = curl_easy_perform(handle);
+  // Check the result
+  if (result != CURLE_OK) {
+    // If the request failed, print an error message
+    std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror(result) << std::endl;
+  } else {
+    // If the request was successful, print the response
+    std::cout << response.str() << std::endl;
+  }
+  // Clean up
+  curl_easy_cleanup(handle);
+  curl_global_cleanup();
 
 
 
