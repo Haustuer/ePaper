@@ -12,8 +12,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>	//inet_addr
 /* */
-// anderes beispiel
-#include <curl/curl.h>
+
 
 /* */
 
@@ -83,35 +82,6 @@ int main(int argc, char *argv[])
 	EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, INIT_Mode);
 
 
-         // Initialize the curl library
-  curl_global_init(CURL_GLOBAL_DEFAULT);
-  // Create a curl handle
-  CURL *handle = curl_easy_init();
-  // Set the URL to request
-  curl_easy_setopt(handle, CURLOPT_URL, "https://www.example.com");
-  // Set the callback function to handle the response
-  curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, [](char *data, size_t size, size_t nmemb, void *userp) {
-    // Cast the user pointer to an ostream and write the data to it
-    *static_cast<std::ostream*>(userp) << data;
-    // Return the number of bytes processed
-    return size * nmemb;
-  });
-  // Set the user pointer to be an ostream to which the response will be written
-  std::ostringstream response;
-  curl_easy_setopt(handle, CURLOPT_WRITEDATA, &response);
-  // Perform the request
-  CURLcode result = curl_easy_perform(handle);
-  // Check the result
-  if (result != CURLE_OK) {
-    // If the request failed, print an error message
-    std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror(result) << std::endl;
-  } else {
-    // If the request was successful, print the response
-    std::cout << response.str() << std::endl;
-  }
-  // Clean up
-  curl_easy_cleanup(handle);
-  curl_global_cleanup();
 
 
 
@@ -126,7 +96,7 @@ int main(int argc, char *argv[])
     EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, GC16_Mode);
 
 
-  /*/
+  
 
     int socket_desc;
 	struct sockaddr_in server;
@@ -136,7 +106,7 @@ int main(int argc, char *argv[])
 	socket_desc = socket(AF_INET , SOCK_STREAM , 0);
 	if (socket_desc == -1) Debug("Could not create socket");
 		
-	server.sin_addr.s_addr = inet_addr("127.0.0.1");
+	server.sin_addr.s_addr = inet_addr("127.0.0.1/shipsList");
 	server.sin_family = AF_INET;
 	server.sin_port = htons( 443 );
 
@@ -162,7 +132,7 @@ int main(int argc, char *argv[])
 	}
 	puts("Reply received\n");
 	puts(server_reply);
-    */
+    
 
     
    /* //Show A2 mode refresh effect
