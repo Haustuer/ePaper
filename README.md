@@ -1,8 +1,11 @@
 # ePaper
 
 cd ePaper
+
 sudo make clean
+
 sudo make -j4
+
 sudo ./epd 
 
 
