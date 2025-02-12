@@ -99,7 +99,7 @@ function scaleToMap(mercatorX, mercatorY) {
   const x = ((mercatorX - minX) / (maxX - minX)) * WIDTH;
   const y = HEIGHT - ((mercatorY - minY) / (maxY - minY)) * HEIGHT;
 
-  return [ x, y ];
+  return [ Math.round(x), Math.round(y) ];
 }
 
 // Mercator projection function
