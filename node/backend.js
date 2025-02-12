@@ -28,19 +28,19 @@ app.get('/', (req, res) => {
       objectsToDraw=[];
       trackedObjects.ships.forEach((thing)=>{
         const result1 = mercatorProjection(thing.position[0], thing.position[1]);
-        const result = scaleToMap(result1.x, result1.y);
+        const result = scaleToMap(result1[0], result1[1]);
         let newThing={"x":result[0],"y":result[1],"icon":1};
 
         objectsToDraw.push(newThing);
       })
       trackedObjects.planes.forEach((thing)=>{
         const result1 = mercatorProjection(thing.position[0], thing.position[1]);
-        const result = scaleToMap(result1.x, result1.y);
+        const result = scaleToMap(result1[0], result1[1]);
         objectsToDraw.push({"x":result[0],"y":result[1],"icon":2});
       })
       trackedObjects.otherObjects.forEach((thing)=>{
         const result1 = mercatorProjection(thing.position[0], thing.position[1]);
-        const result = scaleToMap(result1.x, result1.y);
+        const result = scaleToMap(result1[0], result1[1]);
         objectsToDraw.push({"x":result[0],"y":result[1],"icon":3});
       })
 
