@@ -12,6 +12,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h> //inet_addr
 /* */
+#include <unistd.h>
 
 UWORD VCOM = 1520;
 IT8951_Dev_Info Dev_Info = {0, 0};
@@ -176,23 +177,40 @@ int main(int argc, char *argv[])
 
         // Find the start of the JSON payload
         char *json_start = strstr(server_reply, "\r\n\r\n");
-        if (json_start == nullptr)
+        if (json_start == NULL)
         {
             puts("Could not find JSON payload");
             return 1;
         }
         json_start += 4; // Skip the "\r\n\r\n"
 
-        // Parse the JSON payload
-        std::string json_payload(json_start);
-        auto json_data = nlohmann::json::parse(json_payload);
+        // Manually parse the JSON payload
+        // Assuming the JSON format is: [{"x":50,"y":25,"icon":2},{"x":20,"y":70,"icon":1},{"x":20,"y":90,"icon":2}]
+        const char *delimiter = ",:{}[]\"";
+        char *token = strtok(json_start, delimiter);
 
-        // Print the extracted JSON data
-        for (const auto &item : json_data)
+        while (token != NULL)
         {
-            printf("x: %d, y: %d, icon: %d\n", item["x"], item["y"], item["icon"]);
+            if (strcmp(token, "x") == 0)
+            {
+                token = strtok(NULL, delimiter);
+                int x = atoi(token);
+                printf("x: %d, ", x);
+            }
+            else if (strcmp(token, "y") == 0)
+            {
+                token = strtok(NULL, delimiter);
+                int y = atoi(token);
+                printf("y: %d, ", y);
+            }
+            else if (strcmp(token, "icon") == 0)
+            {
+                token = strtok(NULL, delimiter);
+                int icon = atoi(token);
+                printf("icon: %d\n", icon);
+            }
+            token = strtok(NULL, delimiter);
         }
-
         Debug("end of Socket");
 
         break;
