@@ -213,6 +213,8 @@ int main(int argc, char *argv[])
         }
         Debug("end of Socket");
 
+        Display_BMP_HST(Panel_Width, Panel_Height, Init_Target_Memory_Addr, BitsPerPixel_4);
+
         break;
 
     default:
