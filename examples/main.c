@@ -117,11 +117,11 @@ int main(int argc, char *argv[])
         return -1;
     }
     
-    double temp;
+    uint temp;
     sscanf(argv[1],"%u",&temp);    
     Debug("Arg 1:%u\r\n", temp);
 
-    double temp1;
+    char  *temp1;
 	sscanf(argv[2],"%s",&temp1);
     Debug("Arg 2:%s\r\n", temp1);
 
