@@ -200,12 +200,9 @@ UBYTE Display_BMP_Example(UWORD Panel_Width, UWORD Panel_Height, UDOUBLE Init_Ta
     if((Refresh_Frame_Buf = (UBYTE *)malloc(Imagesize)) == NULL) {
         Debug("Failed to apply for black memory...\r\n");
         return -1;
-    }
+     }  
 
-    
-    
-
-
+   
     Paint_NewImage(Refresh_Frame_Buf, WIDTH, HEIGHT, 0, BLACK);
     Paint_SelectImage(Refresh_Frame_Buf);
 	Epd_Mode(epd_mode);
@@ -287,7 +284,9 @@ UBYTE Display_BMP_HST(UWORD Panel_Width, UWORD Panel_Height, UDOUBLE Init_Target
     int sizeX= 70;
     int sizeY= 70;
 
-    Paint_NewImage(Refresh_Frame_Buf, sizeX, sizeY, 0, BLACK);
+   
+
+    Paint_NewImage(Refresh_Frame_Buf, WIDTH, HEIGHT, 0, BLACK);
     Paint_SelectImage(Refresh_Frame_Buf);
 	Epd_Mode(epd_mode);
     Paint_SetBitsPerPixel(BitsPerPixel);
