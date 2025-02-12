@@ -1,0 +1,182 @@
+const WebSocket = require('ws');
+const socket = new WebSocket("wss://stream.aisstream.io/v0/stream")
+const WebSocket_port = 8081
+const http = require("http");
+
+// REST API
+const RestAPI_port = 10443;
+
+const express = require('express');
+const app = express();
+app.get('/', (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.send('REST API ');
+  });
+  
+  // Define routes
+  app.get('/ships', (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.send(JSON.stringify(trackedObjects));
+  });
+  app.get('/shipsList', (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.end(JSON.stringify(ShipList));
+  });
+  
+  app.listen(RestAPI_port, () => {
+    console.log(`Server running at http://localhost:${RestAPI_port}`);
+  });
+  
+
+  // DATA Structur
+  var trackedObjects = {
+    "ships": [],
+    "planes": [],
+    "otherObjects": [ {
+      "name":"Titanic",
+      "position":[41.7325, -49.9469],
+      "source": "Fix",
+      "type" : "Wreck",
+      "MMSI": 912320328
+    }
+    ],
+  }  
+
+  var ShipList = ["211238300", "211735050", "211713930", "353136000", "368207620", "367719770", "211476060", "228131430", "211222710"];
+
+
+  /* ---------------------------------------------
+     Connecting and handling AIS Stream API
+   --------------------------------------------- */
+  let sockets = [];
+  socket.onopen = function (_) {
+    let subscriptionMessage = {
+      Apikey: "f250a5ee54279fb5f5ace67cafa8adec51a4a169",
+      BoundingBoxes: [[[-90, -180], [90, 180]]],
+      FiltersShipMMSI: ShipList, // Optional!
+      FilterMessageTypes: ["PositionReport"] // Optional!
+    }
+    socket.send(JSON.stringify(subscriptionMessage));
+  };
+  
+  socket.onmessage = function (event) {
+    let aisMessage = JSON.parse(event.data)
+    //console.log(aisMessage)
+    let obj={}
+    obj.name = aisMessage.MetaData.ShipName
+    obj.MMSI = aisMessage.MetaData.MMSI
+    obj.position = [aisMessage.Message.PositionReport.Latitude, aisMessage.Message.PositionReport.Longitude];
+    obj.timeStamp = aisMessage.MetaData.time_utc
+    obj.source = "AisStream"
+    addObjToTracker(obj, trackedObjects.ships) 
+  };
+  /* -------------------------------------------------------
+     Connecting and handling Local Web Socket for server
+   ------------------------------------------------------ */
+  
+  const server = new WebSocket.Server({
+    port: WebSocket_port
+  });
+  
+  server.on('connection', function (socket) {
+    sockets.push(socket);
+    //console.log(sockets);
+    // When you receive a message, send that message to every socket.
+    socket.on('message', function (msg) {
+      //sockets.forEach(s => s.send(msg));   
+      //console.log(msg)    ;
+      let updateMSG = {};
+      trackedObjects.ships.forEach(ship => {
+        updateMSG.type = "Ship";
+        updateMSG.state = "New";
+        updateMSG.content = ship;
+        socket.send(JSON.stringify(updateMSG))      
+      }
+      );
+      trackedObjects.otherObjects.forEach(ship => {
+        updateMSG.type = "Object";
+        updateMSG.state = "New";
+        updateMSG.content = ship;
+        socket.send(JSON.stringify(updateMSG))      
+      });
+      trackedObjects.planes.forEach(ship => {
+        updateMSG.type = "Plane";
+        updateMSG.state = "New";
+        updateMSG.content = ship;
+        socket.send(JSON.stringify(updateMSG))    
+      });
+    });
+    // When a socket closes, or disconnects, remove it from the array.
+    socket.on('close', function () {
+      sockets = sockets.filter(s => s !== socket);
+    });
+  });
+  
+  /* ---------------------------------------------------------
+      This part fetches the ISS Location from wheretheiss.at
+  ----------------------------------------------------------*/
+  setInterval(() => {
+    fetch('https://api.wheretheiss.at/v1/satellites/25544')
+      .then(response => {
+        // console.log(response)
+        if (response.status == 200) {       
+          return response.json()
+        }      
+      })
+      .then(data => {
+        // console.log(data);
+        return [data.latitude, data.longitude]
+      }).then(ShipPos => {
+        let objID = 25544
+        let obj = {}
+        obj.MMSI = objID
+        obj.name = "ISS"
+        obj.source = "wheretheiss.at"
+        obj.position = ShipPos
+        obj.type = "Satelit"
+        obj.timeStamp = new Date()         
+        addObjToTracker(obj, trackedObjects.otherObjects)
+      })
+  }, 5000)
+  /* -------------------------------------------------------------------
+  this function adds new objefts to the tracker 
+  and updates existing ones
+  finally all updates will be published to all websocket rtecivers
+---------------------------------------------------------------------*/
+function addObjToTracker(obj, database) {
+    //console.log(obj)
+    let myobj = database.find(ship => ship.MMSI === obj.MMSI);
+    let updateMSG = {};
+    let thisType;
+    switch (database) {
+      case trackedObjects.ships:
+        thisType = "Ship"
+        break;
+      case trackedObjects.otherObjects:
+        thisType = "Object";
+        break;
+      case trackedObjects.planes:
+        thisType = "Plane"
+        break;
+      default:
+        thisType = "unknown"
+        break
+    }
+    updateMSG.type=thisType;
+    updateMSG.content = obj;
+    if (typeof myobj !== 'undefined' && myobj !== null) {
+      myobj.position = obj.position
+      myobj.timeStamp=obj.timeStamp   
+      updateMSG.state = "Update";
+  
+    } else {     
+      database.push(obj);    
+      updateMSG.state = "New";  
+  
+    }
+    console.log(obj.name+": "+updateMSG.state)   
+    sockets.forEach(s => s.send(JSON.stringify(updateMSG)));
+  }
