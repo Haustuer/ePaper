@@ -116,9 +116,9 @@ int main(int argc, char *argv[])
 
     int  temp1;
 
-    if (argc == 2){
-        sscanf(argv[1],"%u",&temp);    
-      
+    if (argc == 3){
+        
+        sscanf(argv[1],"%u",&temp);      
 
         sscanf(argv[2],"%u",&temp1);
       
