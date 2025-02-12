@@ -5,7 +5,7 @@
 # cd /git/ePaper
 
 # Run the git pull command with sudo
-git pull
+# git pull
 sudo make clean
 sudo make -j4
 sudo ./epd 1 2
