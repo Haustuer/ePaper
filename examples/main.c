@@ -142,7 +142,37 @@ int main(int argc, char *argv[])
     A2_Mode = 6;    
     Debug("A2 Mode:%d\r\n", A2_Mode);
 
-	EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, INIT_Mode);
+
+
+
+    switch (temp)
+    {
+    case 1:
+    //Show a bmp file
+    //1bp use A2 mode by default, before used it, refresh the screen with WHITE
+    //Display_BMP_Example(Panel_Width, Panel_Height, Init_Target_Memory_Addr, BitsPerPixel_1);
+    //Display_BMP_Example(Panel_Width, Panel_Height, Init_Target_Memory_Addr, BitsPerPixel_2);
+    Display_BMP_Example(Panel_Width, Panel_Height, Init_Target_Memory_Addr, BitsPerPixel_4);
+        break;
+        case 2:
+        EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, GC16_Mode);
+        /* code */
+        break;
+        case 3:
+        /* code */
+        break;
+    
+    default:
+    EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, INIT_Mode);
+
+
+        break;
+    }
+
+
+    
+ 
+	
 
 /*
 
@@ -182,12 +212,8 @@ int main(int argc, char *argv[])
 
 
 
-    //Show a bmp file
-    //1bp use A2 mode by default, before used it, refresh the screen with WHITE
-    Display_BMP_Example(Panel_Width, Panel_Height, Init_Target_Memory_Addr, BitsPerPixel_1);
-    Display_BMP_Example(Panel_Width, Panel_Height, Init_Target_Memory_Addr, BitsPerPixel_2);
-    Display_BMP_Example(Panel_Width, Panel_Height, Init_Target_Memory_Addr, BitsPerPixel_4);
-    EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, GC16_Mode);
+ 
+   
 
 
   /*
@@ -249,14 +275,14 @@ int main(int argc, char *argv[])
 
 
     //We recommended refresh the panel to white color before storing in the warehouse.
-    EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, INIT_Mode);
+//    EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, INIT_Mode);
 
     //EPD_IT8951_Standby();
-    EPD_IT8951_Sleep();
+//   EPD_IT8951_Sleep();
 
     //In case RPI is transmitting image in no hold mode, which requires at most 10s
-    DEV_Delay_ms(5000);
+//    DEV_Delay_ms(5000);
 
-    DEV_Module_Exit();
+//    DEV_Module_Exit();
     return 0;
 }
