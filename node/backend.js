@@ -90,8 +90,8 @@ const R = 6371.0; // Radius of the Earth in kilometers
     const y = R * Math.log(Math.tan(Math.PI / 4.0 + phi / 2.0));
 
     // Convert to percentage
-    const xPercent = ((lambda + Math.PI) / (2 * Math.PI)) * 100.0;
-    const yPercent = ((phi + (Math.PI / 2.0)) / Math.PI) * 100.0;
+    const xPercent = ((lambda + Math.PI) / (2 * Math.PI)) * 1872;
+    const yPercent = ((phi + (Math.PI / 2.0)) / Math.PI) * 1404;
 
     return [ xPercent, yPercent ];
 
