@@ -158,7 +158,7 @@ int main(int argc, char *argv[])
         //Send some data
      //   message = "GET / HTTP/1.1\r\n\r\n";// copilot
      
-        message = "GET /ships HTTP/1.1\r\nHost: 127.0.0.1\r\n\r\n";
+        message = "GET /sprites HTTP/1.1\r\nHost: 127.0.0.1\r\n\r\n";
         if( send(socket_desc , message , strlen(message) , 0) < 0){
             puts("Send failed");
             return 1;
