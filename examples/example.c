@@ -206,7 +206,7 @@ UBYTE Display_BMP_Example(UWORD Panel_Width, UWORD Panel_Height, UDOUBLE Init_Ta
     Paint_SelectImage(Refresh_Frame_Buf);
 	Epd_Mode(epd_mode);
     Paint_SetBitsPerPixel(BitsPerPixel);
-    Paint_Clear(WHITE);
+   // Paint_Clear(WHITE);
 
     char Path[30];
     sprintf(Path,"./pic/%dx%d_2.bmp", WIDTH, HEIGHT);
