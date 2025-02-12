@@ -24,16 +24,19 @@ app.get('/', (req, res) => {
     app.get('/sprites', (req, res) => {
 
 
-      const result = mercatorProjection(latitude, longitude);
+    
       objectsToDraw=[];
-      trackedObjects.ships.forEach((ship)=>{
-        objectsToDraw.push({"x":ship.position[0],"y":ship.position[1],"icon":1});
+      trackedObjects.ships.forEach((thing)=>{
+        const result = mercatorProjection(thing.position[0], thing.position[1]);
+        objectsToDraw.push({"x":result[0],"y":result[1],"icon":1});
       })
-      trackedObjects.planes.forEach((plane)=>{
-        objectsToDraw.push({"x":plane.position[0],"y":plane.position[1],"icon":2});
+      trackedObjects.planes.forEach((thing)=>{
+        const result = mercatorProjection(thing.position[0], thing.position[1]);
+        objectsToDraw.push({"x":result[0],"y":result[1],"icon":1});
       })
-      trackedObjects.otherObjects.forEach((otherObject)=>{
-        objectsToDraw.push({"x":otherObject.position[0],"y":otherObject.position[1],"icon":3});
+      trackedObjects.otherObjects.forEach((thing)=>{
+        const result = mercatorProjection(thing.position[0], thing.position[1]);
+        objectsToDraw.push({"x":result[0],"y":result[1],"icon":1});
       })
 
       res.header("Access-Control-Allow-Origin", "*");
