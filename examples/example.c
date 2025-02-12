@@ -284,19 +284,19 @@ UBYTE Display_BMP_HST(UWORD Panel_Width, UWORD Panel_Height, UDOUBLE Init_Target
 
     int startX= x;
     int startY= y;
-    int sizeX= 30;
-    int sizeY= 40;
+    int sizeX= 70;
+    int sizeY= 70;
 
-    Paint_NewImage(Refresh_Frame_Buf, WIDTH, HEIGHT, 0, BLACK);
+    Paint_NewImage(Refresh_Frame_Buf, sizeX, sisizeYzeX, 0, BLACK);
     Paint_SelectImage(Refresh_Frame_Buf);
 	Epd_Mode(epd_mode);
     Paint_SetBitsPerPixel(BitsPerPixel);
    // Paint_Clear(WHITE);
 
     char Path[30];
-    sprintf(Path,"./pic/2.bmp" ,sizeX, sizeY);
+    sprintf(Path,"./pic/2.bmp" );
 
-    GUI_ReadBmp(Path, startX, startY);
+    GUI_ReadBmp(Path, 0, 0);
 
     //you can draw your character and pattern on the image, for color definition of all BitsPerPixel, you can refer to GUI_Paint.h, 
  //   Paint_DrawRectangle(startX, startY, sizeX, sizeY, 0x30, DOT_PIXEL_3X3, DRAW_FILL_EMPTY);
