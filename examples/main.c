@@ -12,42 +12,8 @@
 #include <sys/socket.h>
 #include <arpa/inet.h> //inet_addr
 /* */
-#include <curl/curl.h>
-
-/*
-struct string {
-    char *ptr;
-    size_t len;
-};
-
-void init_string(struct string *s) {
-    s->len = 0;
-    s->ptr = malloc(s->len + 1);
-    if (s->ptr == NULL) {
-        fprintf(stderr, "malloc() failed\n");
-        exit(EXIT_FAILURE);
-    }
-    s->ptr[0] = '\0';
-}
-
-size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp) {
-    size_t total_size = size * nmemb;
-    struct string *s = (struct string *)userp;
-
-    char *ptr = realloc(s->ptr, s->len + total_size + 1);
-    if (ptr == NULL) {
-        fprintf(stderr, "realloc() failed\n");
-        return 0;
-    }
-    s->ptr = ptr;
-    memcpy(&(s->ptr[s->len]), contents, total_size);
-    s->len += total_size;
-    s->ptr[s->len] = '\0';
-
-    return total_size;
 
 
-/*   tghjis is a vcurl funkion on top*/
 
 UWORD VCOM = 1520;
 IT8951_Dev_Info Dev_Info = {0, 0};
@@ -172,43 +138,7 @@ int main(int argc, char *argv[])
         break;
     }
 
-    /*
-
-
-        // Initialize the curl library
-      curl_global_init(CURL_GLOBAL_DEFAULT);
-      // Create a curl handle
-      CURL *handle = curl_easy_init();
-      // Set the URL to request
-      curl_easy_setopt(handle, CURLOPT_URL, "http://127.0.0.1");
-      // Set the callback function to handle the response
-      curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, [](char *data, size_t size, size_t nmemb, void *userp) {
-        // Cast the user pointer to an ostream and write the data to it
-        *static_cast<std::ostream*>(userp) << data;
-        // Return the number of bytes processed
-        return size * nmemb;
-      });
-      // Set the user pointer to be an ostream to which the response will be written
-      std::ostringstream response;
-      curl_easy_setopt(handle, CURLOPT_WRITEDATA, &response);
-      // Perform the request
-      CURLcode result = curl_easy_perform(handle);
-      // Check the result
-      if (result != CURLE_OK) {
-        // If the request failed, print an error message
-        std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror(result) << std::endl;
-      } else {
-        // If the request was successful, print the response
-        std::cout << response.str() << std::endl;
-      }
-      // Clean up
-      curl_easy_cleanup(handle);
-      curl_global_cleanup();
-
-
-    */
-
-    /*
+    Debug("Start of Socket");
 
       int socket_desc;
       struct sockaddr_in server;
@@ -245,7 +175,9 @@ int main(int argc, char *argv[])
       puts("Reply received\n");
       puts(server_reply);
 
-  */
+
+      Debug("end of Socket");
+  
 
     /* //Show A2 mode refresh effect
      EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, A2_Mode);
