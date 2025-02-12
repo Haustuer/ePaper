@@ -287,7 +287,7 @@ UBYTE Display_BMP_HST(UWORD Panel_Width, UWORD Panel_Height, UDOUBLE Init_Target
     int sizeX= 70;
     int sizeY= 70;
 
-    Paint_NewImage(Refresh_Frame_Buf, sizeX, sisizeYzeX, 0, BLACK);
+    Paint_NewImage(Refresh_Frame_Buf, sizeX, sizeY, 0, BLACK);
     Paint_SelectImage(Refresh_Frame_Buf);
 	Epd_Mode(epd_mode);
     Paint_SetBitsPerPixel(BitsPerPixel);
