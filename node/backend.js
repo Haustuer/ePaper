@@ -78,7 +78,7 @@ app.get('/', (req, res) => {
 
   var ShipList = ["211238300", "211735050", "211713930", "353136000", "368207620", "367719770", "211476060", "228131430", "211222710"];
 // Constants
-const R = 6371.0; // Radius of the Earth in kilometers
+const R = 1; // Radius of the Earth in kilometers
 // Constants
 const WIDTH = 1872;  // Width of the map in pixels
 const HEIGHT = 1404; // Height of the map in pixels
