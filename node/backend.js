@@ -38,14 +38,14 @@ app.get('/', (req, res) => {
       trackedObjects.planes.forEach((thing)=>{
         const result = mercatorProjection(thing.position[0], thing.position[1]);
        //const result = scaleToMap(result1[0], result1[1]);
-       let newThing={"x":Math.round((wid*result[0])/100),"y":Math.round((hig*result[1])/100),"icon":1};
+       let newThing={"x":Math.round((wid*result[0])/100),"y":Math.round((hig*result[1])/100),"icon":2};
 
        objectsToDraw.push(newThing);
       })
       trackedObjects.otherObjects.forEach((thing)=>{
         const result = mercatorProjection(thing.position[0], thing.position[1]);
       //  const result = scaleToMap(result1[0], result1[1]);
-      let newThing={"x":Math.round((wid*result[0])/100),"y":Math.round((hig*result[1])/100),"icon":1};
+      let newThing={"x":Math.round((wid*result[0])/100),"y":Math.round((hig*result[1])/100),"icon":3};
 
       objectsToDraw.push(newThing);
       })
