@@ -188,33 +188,36 @@ int main(int argc, char *argv[])
         // Assuming the JSON format is: [{"x":50,"y":25,"icon":2},{"x":20,"y":70,"icon":1},{"x":20,"y":90,"icon":2}]
         const char *delimiter = ",:{}[]\"";
         char *token = strtok(json_start, delimiter);
-
+        int x;
+        int y;
+        int icon;
         while (token != NULL)
         {
             if (strcmp(token, "x") == 0)
             {
                 token = strtok(NULL, delimiter);
-                int x = atoi(token);
+                x = atoi(token);
                 printf("x: %d, ", x);
             }
             else if (strcmp(token, "y") == 0)
             {
                 token = strtok(NULL, delimiter);
-                int y = atoi(token);
+                y = atoi(token);
                 printf("y: %d, ", y);
             }
             else if (strcmp(token, "icon") == 0)
             {
                 token = strtok(NULL, delimiter);
-                int icon = atoi(token);
+                icon = atoi(token);
                 printf("icon: %d\n", icon);
+                Display_BMP_HST(Panel_Width, Panel_Height, Init_Target_Memory_Addr, BitsPerPixel_4,x,y);
+
             }
             token = strtok(NULL, delimiter);
         }
         Debug("end of Socket");
 
-        Display_BMP_HST(Panel_Width, Panel_Height, Init_Target_Memory_Addr, BitsPerPixel_4);
-
+      
         break;
 
     default:
