@@ -20,6 +20,12 @@ app.get('/', (req, res) => {
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     res.send(JSON.stringify(trackedObjects));
   });
+    // Define routes
+    app.get('/sprites', (req, res) => {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers", "X-Requested-With");
+      res.send(JSON.stringify(objectsToDraw));
+    });
   app.get('/shipsList', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -44,6 +50,9 @@ app.get('/', (req, res) => {
     }
     ],
   }  
+
+  var objectsToDraw=[{"x":50,"y":25,"icon":2},{"x":20,"y":70,"icon":1},{"x":20,"y":90,"icon":2}];
+
 
   var ShipList = ["211238300", "211735050", "211713930", "353136000", "368207620", "367719770", "211476060", "228131430", "211222710"];
 
