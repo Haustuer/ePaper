@@ -202,7 +202,11 @@ UBYTE Display_BMP_Example(UWORD Panel_Width, UWORD Panel_Height, UDOUBLE Init_Ta
         return -1;
     }
 
-  //  Paint_NewImage(Refresh_Frame_Buf, WIDTH, HEIGHT, 0, BLACK);
+    
+    
+
+
+    Paint_NewImage(Refresh_Frame_Buf, WIDTH, HEIGHT, 0, BLACK);
     Paint_SelectImage(Refresh_Frame_Buf);
 	Epd_Mode(epd_mode);
     Paint_SetBitsPerPixel(BitsPerPixel);
@@ -278,6 +282,11 @@ UBYTE Display_BMP_HST(UWORD Panel_Width, UWORD Panel_Height, UDOUBLE Init_Target
         return -1;
     }
 
+    int startX= 20;
+    int startY= 20;
+    int sizeX= 30;
+    int sizeY= 40;
+
     Paint_NewImage(Refresh_Frame_Buf, WIDTH, HEIGHT, 0, BLACK);
     Paint_SelectImage(Refresh_Frame_Buf);
 	Epd_Mode(epd_mode);
@@ -285,9 +294,9 @@ UBYTE Display_BMP_HST(UWORD Panel_Width, UWORD Panel_Height, UDOUBLE Init_Target
    // Paint_Clear(WHITE);
 
     char Path[30];
-    sprintf(Path,"./pic/2.bmp" ,50, 50);
+    sprintf(Path,"./pic/2.bmp" ,sizeX, sizeY);
 
-    GUI_ReadBmp(Path, 40, 20);
+    GUI_ReadBmp(Path, startX, startY);
 
     //you can draw your character and pattern on the image, for color definition of all BitsPerPixel, you can refer to GUI_Paint.h, 
  //   Paint_DrawRectangle(50, 50, WIDTH/2, HEIGHT/2, 0x30, DOT_PIXEL_3X3, DRAW_FILL_EMPTY);
