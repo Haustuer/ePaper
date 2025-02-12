@@ -22,6 +22,20 @@ app.get('/', (req, res) => {
   });
     // Define routes
     app.get('/sprites', (req, res) => {
+
+
+      const result = mercatorProjection(latitude, longitude);
+      objectsToDraw=[];
+      trackedObjects.ships.forEach((ship)=>{
+        objectsToDraw.push({"x":ship.position[0],"y":ship.position[1],"icon":1});
+      })
+      trackedObjects.planes.forEach((plane)=>{
+        objectsToDraw.push({"x":plane.position[0],"y":plane.position[1],"icon":2});
+      })
+      trackedObjects.otherObjects.forEach((otherObject)=>{
+        objectsToDraw.push({"x":otherObject.position[0],"y":otherObject.position[1],"icon":3});
+      })
+
       res.header("Access-Control-Allow-Origin", "*");
       res.header("Access-Control-Allow-Headers", "X-Requested-With");
       res.send(JSON.stringify(objectsToDraw));
@@ -55,6 +69,27 @@ app.get('/', (req, res) => {
 
 
   var ShipList = ["211238300", "211735050", "211713930", "353136000", "368207620", "367719770", "211476060", "228131430", "211222710"];
+
+  function toRadians(degrees) {
+    return degrees * Math.PI / 180.0;
+}
+
+  function mercatorProjection(latitude, longitude) {
+    const phi = toRadians(latitude);   // Convert latitude to radians
+    const lambda = toRadians(longitude); // Convert longitude to radians
+
+    // Mercator projection
+    const x = R * lambda;
+    const y = R * Math.log(Math.tan(Math.PI / 4.0 + phi / 2.0));
+
+    // Convert to percentage
+    const xPercent = ((lambda + Math.PI) / (2 * Math.PI)) * 100.0;
+    const yPercent = ((phi + (Math.PI / 2.0)) / Math.PI) * 100.0;
+
+    return { xPercent, yPercent };
+
+  }
+
 
 
   /* ---------------------------------------------
