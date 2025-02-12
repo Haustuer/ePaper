@@ -32,11 +32,11 @@ app.get('/', (req, res) => {
       })
       trackedObjects.planes.forEach((thing)=>{
         const result = mercatorProjection(thing.position[0], thing.position[1]);
-        objectsToDraw.push({"x":result[0],"y":result[1],"icon":1});
+        objectsToDraw.push({"x":result[0],"y":result[1],"icon":2});
       })
       trackedObjects.otherObjects.forEach((thing)=>{
         const result = mercatorProjection(thing.position[0], thing.position[1]);
-        objectsToDraw.push({"x":result[0],"y":result[1],"icon":1});
+        objectsToDraw.push({"x":result[0],"y":result[1],"icon":3});
       })
 
       res.header("Access-Control-Allow-Origin", "*");
