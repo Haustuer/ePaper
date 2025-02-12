@@ -100,7 +100,7 @@ function mercatorProjection(latitude, longitude) {
     const yPercent = ((phi + (Math.PI / 2.0)) / Math.PI) * 100.0;
 
     return [ xPercent, yPercent ];
-
+}
   /* ---------------------------------------------
      Connecting and handling AIS Stream API
    --------------------------------------------- */
