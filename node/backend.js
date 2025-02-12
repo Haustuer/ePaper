@@ -102,24 +102,18 @@ function scaleToMap(mercatorX, mercatorY) {
   return [ x, y ];
 }
 
+// Mercator projection function
+function mercatorProjection(latitude, longitude) {
+  const phi = toRadians(latitude);    // Convert latitude to radians
+  const lambda = toRadians(longitude); // Convert longitude to radians
 
-  function mercatorProjection(latitude, longitude) {
-    const phi = toRadians(latitude);   // Convert latitude to radians
-    const lambda = toRadians(longitude); // Convert longitude to radians
+  // Mercator projection
+  const x = R * lambda;
+  const y = R * Math.log(Math.tan(Math.PI / 4.0 + phi / 2.0));
 
-    // Mercator projection
-    const x = R * lambda;
-    const y = R * Math.log(Math.tan(Math.PI / 4.0 + phi / 2.0));
+  return [ x, y ];
 
-    // Convert to percentage
-    const xPercent =Math.round( ((lambda + Math.PI) / (2 * Math.PI)) * 1872/2);
-    const yPercent =Math.round( ((phi + (Math.PI / 2.0)) / Math.PI) * 1404/2);
-
-    return [ xPercent, yPercent ];
-
-  }
-
-
+}
 
   /* ---------------------------------------------
      Connecting and handling AIS Stream API
