@@ -27,20 +27,20 @@ app.get('/', (req, res) => {
     
       objectsToDraw=[];
       trackedObjects.ships.forEach((thing)=>{
-        const result1 = mercatorProjection(thing.position[0], thing.position[1]);
-        const result = scaleToMap(result1[0], result1[1]);
+       const result = mercatorProjection(thing.position[0], thing.position[1]);
+       // const result = scaleToMap(result1[0], result1[1]);
         let newThing={"x":result[0],"y":result[1],"icon":1};
 
         objectsToDraw.push(newThing);
       })
       trackedObjects.planes.forEach((thing)=>{
-        const result1 = mercatorProjection(thing.position[0], thing.position[1]);
-        const result = scaleToMap(result1[0], result1[1]);
+        const result = mercatorProjection(thing.position[0], thing.position[1]);
+       //const result = scaleToMap(result1[0], result1[1]);
         objectsToDraw.push({"x":result[0],"y":result[1],"icon":2});
       })
       trackedObjects.otherObjects.forEach((thing)=>{
-        const result1 = mercatorProjection(thing.position[0], thing.position[1]);
-        const result = scaleToMap(result1[0], result1[1]);
+        const result = mercatorProjection(thing.position[0], thing.position[1]);
+      //  const result = scaleToMap(result1[0], result1[1]);
         objectsToDraw.push({"x":result[0],"y":result[1],"icon":3});
       })
 
@@ -77,43 +77,29 @@ app.get('/', (req, res) => {
 
 
   var ShipList = ["211238300", "211735050", "211713930", "353136000", "368207620", "367719770", "211476060", "228131430", "211222710"];
-// Constants
-const R = 1; // Radius of the Earth in kilometers
-// Constants
-const WIDTH = 1872;  // Width of the map in pixels
-const HEIGHT = 1404; // Height of the map in pixels
 
-  function toRadians(degrees) {
+  // Constants
+const R = 6371.0; // Radius of the Earth in kilometers
+
+// Convert degrees to radians
+function toRadians(degrees) {
     return degrees * Math.PI / 180.0;
-}
-
-// Scale Mercator coordinates to fit map dimensions
-function scaleToMap(mercatorX, mercatorY) {
-  // Longitude ranges from -180 to 180, latitude ranges from -85.0511 to 85.0511 (Mercator limit)
-  const minX = -Math.PI * R;
-  const maxX = Math.PI * R;
-  const minY = -Math.log(Math.tan(Math.PI / 4.0 + toRadians(-85.0511) / 2.0)) * R;
-  const maxY = Math.log(Math.tan(Math.PI / 4.0 + toRadians(85.0511) / 2.0)) * R;
-
-  // Scale x and y to the map dimensions
-  const x = ((mercatorX - minX) / (maxX - minX)) * WIDTH;
-  const y = HEIGHT - ((mercatorY - minY) / (maxY - minY)) * HEIGHT;
-
-  return [ Math.round(x), Math.round(y) ];
 }
 
 // Mercator projection function
 function mercatorProjection(latitude, longitude) {
-  const phi = toRadians(latitude);    // Convert latitude to radians
-  const lambda = toRadians(longitude); // Convert longitude to radians
+    const phi = toRadians(latitude);   // Convert latitude to radians
+    const lambda = toRadians(longitude); // Convert longitude to radians
 
-  // Mercator projection
-  const x = R * lambda;
-  const y = R * Math.log(Math.tan(Math.PI / 4.0 + phi / 2.0));
+    // Mercator projection
+    const x = R * lambda;
+    const y = R * Math.log(Math.tan(Math.PI / 4.0 + phi / 2.0));
 
-  return [ x, y ];
+    // Convert to percentage
+    const xPercent = ((lambda + Math.PI) / (2 * Math.PI)) * 100.0;
+    const yPercent = ((phi + (Math.PI / 2.0)) / Math.PI) * 100.0;
 
-}
+    return [ xPercent, yPercent ];
 
   /* ---------------------------------------------
      Connecting and handling AIS Stream API
