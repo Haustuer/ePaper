@@ -106,24 +106,37 @@ int main(int argc, char *argv[])
         Debug("Not 2 Args!\r\n");
        
     
-    }
-	if (argc != 3){
+    }if (argc != 3){
 		Debug("nor 3 Args!\r\n");
 		
     }
 
+      
+    int temp; 
+
+    int  temp1;
+
+    if (argc == 2){
+        sscanf(argv[1],"%u",&temp);    
+      
+
+        sscanf(argv[2],"%u",&temp1);
+      
+    }else{
+        temp=1;
+        temp1=0;
+    }
+
+
+    Debug("Arg 1:%u\r\n", temp);
+    Debug("Arg 2:%u\r\n", temp1);
+    
     //Init the BCM2835 Device
     if(DEV_Module_Init()!=0){
         return -1;
     }
-     
-    int temp;
-    sscanf(argv[1],"%u",&temp);    
-    Debug("Arg 1:%u\r\n", temp);
-
-    int  temp1;
-	sscanf(argv[2],"%u",&temp1);
-    Debug("Arg 2:%u\r\n", temp1);
+   
+	
 
     
 
