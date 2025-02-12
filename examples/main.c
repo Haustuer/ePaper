@@ -95,7 +95,37 @@ void  Handler(int signo){
 int main(int argc, char *argv[])
 {
     //Exception handling:ctrl + c
-    signal(SIGINT, Handler);  
+    signal(SIGINT, Handler); 
+
+
+
+
+
+
+ if (argc < 2){
+        Debug("Not 2 Args!\r\n");
+       
+    
+    }
+	if (argc != 3){
+		Debug("nor 3 Args!\r\n");
+		
+    }
+
+    //Init the BCM2835 Device
+    if(DEV_Module_Init()!=0){
+        return -1;
+    }
+    
+    double temp;
+    sscanf(argv[1],"%u",&temp);    
+    Debug("Arg 1:%u\r\n", temp);
+
+    double temp1;
+	sscanf(argv[2],"%s",&temp1);
+    Debug("Arg 2:%s\r\n", temp1);
+
+    
 
     //Init the BCM2835 Device
     if(DEV_Module_Init()!=0){
