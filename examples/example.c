@@ -497,7 +497,7 @@ UBYTE Display_BMP_Short2( UDOUBLE Init_Target_Memory_Addr ,int x, int y,int icon
 
     UBYTE BitsPerPixel = BitsPerPixel_8;
  
-    UWORD Panel_Widt;
+    UWORD Panel_Width;
     UWORD Panel_Height;
     char Path[30];
 
