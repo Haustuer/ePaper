@@ -223,28 +223,14 @@ int main(int argc, char *argv[])
 
       
         break;
-
-        case 4:
-             x=200;;
-         y=100;
-        Display_BMP_HST1(100, 100, Init_Target_Memory_Addr, BitsPerPixel_4,x,y);
-        break;
-        case 5:
-         x=300;;
-         y=300;
-        Display_BMP_HST1(600, 600, Init_Target_Memory_Addr, BitsPerPixel_4,x,y);
-        break;
-        case 6:
-        x=600;;
-         y=100;
-        Display_BMP_HST1(114, 138, Init_Target_Memory_Addr, BitsPerPixel_8,x,y);
-        break;
         case 7:
-        x=600;;
-         y=100;
-         Display_BMP_HST1(Panel_Width, Panel_Height, Init_Target_Memory_Addr, BitsPerPixel_8,x,y);
+        Dynamic_GIF_Example(Panel_Width, Panel_Height, Init_Target_Memory_Addr);
         break;
-        case 8:
+
+
+       
+       case 8:
+        
         x=300;;
         y=300;
         Display_BMP_Short(Init_Target_Memory_Addr, x, y, 3, 4);
