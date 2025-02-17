@@ -9,4 +9,4 @@
 sudo git pull
 sudo make clean
 sudo make -j4
-sudo ./epd 4 2
+sudo ./epd 3 2
