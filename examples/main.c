@@ -273,34 +273,22 @@ int main(int argc, char *argv[])
        double min_lat = -85.05112878;   // Minimum latitude for Mercator projection
        double center_meridian = 0.0;    // Center meridian in degrees
     
-       int x, y;
-       mercator_projection(lat, lon, canvas_width, canvas_height, min_lat, center_meridian, &x, &y);      
-       //splay_BMP_Short2(Init_Target_Memory_Addr, x, y, 2);
-
+       int x, y;      
     char buffer[40];
-    snprintf(buffer, 40, "Canvas coordinates: (%d, %d)\n", lat, lon);
 
-    Display_Text_Short(Init_Target_Memory_Addr,buffer,x,y,0,0);
+    for (double lat = -90.0; lat <= 90.0; lat += 30.0) {
+        for (double lon = -180.0; lon <= 180.0; lon += 30.0) {
+            snprintf(buffer, 40, "Canvas coordinates: (%d, %d)\n", lat, lon);
 
-      
+            Display_Text_Short(Init_Target_Memory_Addr,buffer,x,y,0,0);
+        }
+    
+    }
+    
 
-        lat = -60.0;               // Latitude in degrees
-        lon = -120.0;   
 
-       mercator_projection(lat, lon, canvas_width, canvas_height, min_lat, center_meridian, &x, &y);      
-       Display_BMP_Short2(Init_Target_Memory_Addr, x, y, 2);
 
-        lat = 0;               // Latitude in degrees
-       lon = 0;   
-
-       mercator_projection(lat, lon, canvas_width, canvas_height, min_lat, center_meridian, &x, &y);      
-       Display_BMP_Short2(Init_Target_Memory_Addr, x, y, 2);
-        
-       lat = 45;              // Latitude in degrees
-        lon = 60;  
-
-       mercator_projection(lat, lon, canvas_width, canvas_height, min_lat, center_meridian, &x, &y);      
-       Display_BMP_Short2(Init_Target_Memory_Addr, x, y, 2);
+   
       break;
 
 
