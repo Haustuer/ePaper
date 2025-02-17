@@ -279,20 +279,20 @@ int main(int argc, char *argv[])
 
 
 
-       double lat = -60.0;               // Latitude in degrees
-       double lon = -120.0;   
+        lat = -60.0;               // Latitude in degrees
+        lon = -120.0;   
 
        mercator_projection(lat, lon, canvas_width, canvas_height, min_lat, center_meridian, &x, &y);      
        Display_BMP_Short2(Init_Target_Memory_Addr, x, y, 2);
 
-       double lat = 0;               // Latitude in degrees
-       double lon = 0;   
+        lat = 0;               // Latitude in degrees
+       lon = 0;   
 
        mercator_projection(lat, lon, canvas_width, canvas_height, min_lat, center_meridian, &x, &y);      
        Display_BMP_Short2(Init_Target_Memory_Addr, x, y, 2);
         
-       double lat = 45;              // Latitude in degrees
-       double lon = 60;  
+       lat = 45;              // Latitude in degrees
+        lon = 60;  
 
        mercator_projection(lat, lon, canvas_width, canvas_height, min_lat, center_meridian, &x, &y);      
        Display_BMP_Short2(Init_Target_Memory_Addr, x, y, 2);
