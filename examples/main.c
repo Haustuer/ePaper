@@ -39,6 +39,8 @@ void transformToCanvas(double virtualX, double virtualY, double minX, double max
     // Normalize virtual coordinates to canvas coordinates
     *canvasX = ((virtualX - minX) / (maxX - minX)) * canvasWidth;
     *canvasY = ((virtualY - minY) / (maxY - minY)) * canvasHeight;
+    Debug("X:%d, Y: %d  tarnsformed to X:%d, Y: %d  \r\n", virtualX,virtualY  ,canvasX,canvasY);
+
 }
 
 void Handler(int signo)
