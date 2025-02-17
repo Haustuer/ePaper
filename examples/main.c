@@ -278,7 +278,7 @@ int main(int argc, char *argv[])
             Display_Text_Short(Init_Target_Memory_Addr,buffer,x,y,0,0);
         }
 
-    }
+    }}
 
         break;
 
