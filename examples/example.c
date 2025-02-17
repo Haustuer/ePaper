@@ -447,7 +447,7 @@ UBYTE Display_BMP_Short2( UDOUBLE Init_Target_Memory_Addr ,int x, int y,int icon
         case 1:
     Panel_Width =  159;
     Panel_Height = 101;
-    sprintf(Path, "./pic/2.bmp");
+    sprintf(Path, "./pic/1.bmp");
     break;
 
     case 2:
@@ -461,7 +461,7 @@ UBYTE Display_BMP_Short2( UDOUBLE Init_Target_Memory_Addr ,int x, int y,int icon
         case 3:
     Panel_Width =  182;
     Panel_Height = 58;
-    sprintf(Path, "./pic/2.bmp");
+    sprintf(Path, "./pic/3.bmp");
     break;
 
     default:
