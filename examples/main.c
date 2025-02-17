@@ -21,6 +21,27 @@ UWORD Panel_Height;
 UDOUBLE Init_Target_Memory_Addr;
 int epd_mode = 1; // 1: no rotate, horizontal mirror, for 10.3inch
 
+
+#define PI 3.14159265358979323846
+
+void mercator_projection(double lat, double lon, int canvas_width, int canvas_height, double min_lat, double center_meridian, int *x, int *y) {
+    // Convert latitude and longitude to radians
+    double rad_lat = lat * PI / 180.0;
+    double rad_lon = lon * PI / 180.0;
+    double rad_center_meridian = center_meridian * PI / 180.0;
+
+    // Calculate the Mercator projection
+    double x_pos = canvas_width / 2.0 + (rad_lon - rad_center_meridian) * (canvas_width / (2.0 * PI));
+    double y_pos = canvas_height / 2.0 - canvas_height / (2.0 * PI) * log(tan(PI / 4.0 + rad_lat / 2.0));
+
+    // Clip coordinates to fit within the canvas
+    *x = (int)fmin(fmax(x_pos, 0), canvas_width - 1);
+    *y = (int)fmin(fmax(y_pos, 0), canvas_height - 1);
+}
+
+
+
+
 void Handler(int signo)
 {
     Debug("\r\nHandler:exit\r\n");
@@ -225,6 +246,11 @@ int main(int argc, char *argv[])
         break;
         case 7:
         
+        
+
+
+
+        
         x=300;;
         y=300;
         Display_BMP_Patch(Init_Target_Memory_Addr, x, y, 20, 30);
@@ -239,9 +265,37 @@ int main(int argc, char *argv[])
        break;
 
        case 9:
-       x=300;;
-       y=300;
-       Display_BMP_Short(Init_Target_Memory_Addr, 100, 200, 3, 4);
+
+       double lat = 45.0;               // Latitude in degrees
+       double lon = -122.0;             // Longitude in degrees
+       int canvas_width = 1872;          // Canvas width in pixels
+       int canvas_height = 1404;         // Canvas height in pixels
+       double min_lat = -85.05112878;   // Minimum latitude for Mercator projection
+       double center_meridian = 0.0;    // Center meridian in degrees
+   
+       int x, y;
+       mercator_projection(lat, lon, canvas_width, canvas_height, min_lat, center_meridian, &x, &y);      
+       Display_BMP_Short2(Init_Target_Memory_Addr, x, y, 2);
+
+
+
+       double lat = -60.0;               // Latitude in degrees
+       double lon = -120.0;   
+
+       mercator_projection(lat, lon, canvas_width, canvas_height, min_lat, center_meridian, &x, &y);      
+       Display_BMP_Short2(Init_Target_Memory_Addr, x, y, 2);
+
+       double lat = 0;               // Latitude in degrees
+       double lon = 0;   
+
+       mercator_projection(lat, lon, canvas_width, canvas_height, min_lat, center_meridian, &x, &y);      
+       Display_BMP_Short2(Init_Target_Memory_Addr, x, y, 2);
+        
+       double lat = 45;              // Latitude in degrees
+       double lon = 60;  
+
+       mercator_projection(lat, lon, canvas_width, canvas_height, min_lat, center_meridian, &x, &y);      
+       Display_BMP_Short2(Init_Target_Memory_Addr, x, y, 2);
       break;
 
 
