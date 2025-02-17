@@ -283,7 +283,7 @@ int main(int argc, char *argv[])
         double subsetMinLon = -180.0;
         double subsetMaxLon = 120.0;
         double subsetMinLat = -60.0;
-        double subsetMaxLat = 30.0
+        double subsetMaxLat = 30.0;
         
         char buffer[40];
 
