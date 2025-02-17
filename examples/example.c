@@ -300,12 +300,12 @@ UBYTE Display_BMP_HST1(UWORD Panel_Width, UWORD Panel_Height, UDOUBLE Init_Targe
     switch(BitsPerPixel){
         case BitsPerPixel_8:{
            // Paint_DrawString_EN(10, 10, "8 bits per pixel 16 grayscale", &Font24, 0xF0, 0x00);
-            EPD_IT8951_8bp_Refresh(Refresh_Frame_Buf, y, x, WIDTH,  HEIGHT, false, Init_Target_Memory_Addr);
+            EPD_IT8951_8bp_Refresh(Refresh_Frame_Buf, y, x, 200,  200, false, Init_Target_Memory_Addr);
             break;
         }
         case BitsPerPixel_4:{
            // Paint_DrawString_EN(10, 10, "4 bits per pixel 16 grayscale", &Font24, 0xF0, 0x00);
-            EPD_IT8951_4bp_Refresh(Refresh_Frame_Buf, x, y, WIDTH,  HEIGHT, false, Init_Target_Memory_Addr,false);
+            EPD_IT8951_4bp_Refresh(Refresh_Frame_Buf, x, y, 200,  200, false, Init_Target_Memory_Addr,false);
             break;
         }
         case BitsPerPixel_2:{
