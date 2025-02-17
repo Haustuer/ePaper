@@ -42,7 +42,7 @@ void mercator_projection(double lat, double lon, int canvas_width, int canvas_he
 
 
     // Calculate the Mercator projection
-    double x_pos = canvas_width / 2.0 + (rad_lon - rad_center_meridian) * (canvas_width / (2.0 * PI));
+    double x_pos = canvas_width / 2.0 - (rad_lon - rad_center_meridian) * (canvas_width / (2.0 * PI));
     double y_pos = canvas_height *(1-norm) ;/// 2.0 - (norm)* (canvas_height ) ;
 
     Debug(" Transforming(lat:%f,lon:%f) to pos[%f,%f]\r\n",lat,lon,x_pos,y_pos);
