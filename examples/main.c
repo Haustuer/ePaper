@@ -46,12 +46,12 @@ void mercator_projection(double lat, double lon, int canvas_width, int canvas_he
 
     // Calculate the Mercator projection
     double x_pos = canvas_width / 2.0 + (rad_lon - rad_center_meridian) * (canvas_width / (2.0 * PI));
-    double y_pos = canvas_height / 2.0 - canvas_height / (2.0 * PI) * norm;
+    double y_pos = canvas_height / 2.0 - (norm/4)* (canvas_height ) ;
 
-    Debug(" Transforming(lat:%f,lon:%f) to pos[%f,%f]",lat,lon,x_pos,y_pos);
+    Debug(" Transforming(lat:%f,lon:%f) to pos[%f,%f]\r\n",lat,lon,x_pos,y_pos);
 
 
-    Debug(" min: %f, max:%f  , lat: %f, norm:%f   ",Mminlat,Mmaxlat,Mlat,norm);
+    Debug(" min: %f, max:%f  , lat: %f, norm:%f  \r\n ",Mminlat,Mmaxlat,Mlat,norm);
     // Clip coordinates to fit within the canvas
     *x = (int)fmin(fmax(x_pos, 0), canvas_width - 1);
     *y = (int)fmin(fmax(y_pos, 0), canvas_height - 1);
