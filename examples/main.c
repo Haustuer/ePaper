@@ -280,7 +280,7 @@ int main(int argc, char *argv[])
     char buffer[40];
     snprintf(buffer, 40, "Canvas coordinates: (%d, %d)\n", lat, lon);
 
-    
+    Display_Text_Short(Init_Target_Memory_Addr,buffer,x,y,0,0)
 
       
 
