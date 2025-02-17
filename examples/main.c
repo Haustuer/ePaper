@@ -269,8 +269,8 @@ int main(int argc, char *argv[])
 
        case 9:
 
-       double lat = 45.0;               // Latitude in degrees
-       double lon = -122.0;             // Longitude in degrees
+     //  double lat = 45.0;               // Latitude in degrees
+     //  double lon = -122.0;             // Longitude in degrees
        int canvas_width = 1872;          // Canvas width in pixels
        int canvas_height = 1404;         // Canvas height in pixels
        double max_lat = 60.0;           // Maximum latitude
