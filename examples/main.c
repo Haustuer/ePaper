@@ -149,8 +149,11 @@ int main(int argc, char *argv[])
     A2_Mode = 6;
     Debug("A2 Mode:%d\r\n", A2_Mode);
     int x;
-    int y;
+    int y;  
 
+    double lat,lng;
+
+    
     switch (temp)
     {
     case 1:
@@ -232,24 +235,25 @@ int main(int argc, char *argv[])
         int icon;
         while (token != NULL)
         {
-            if (strcmp(token, "x") == 0)
+            if (strcmp(token, "lat") == 0)
             {
                 token = strtok(NULL, delimiter);
-                x = atoi(token);
-                printf("x: %d, ", x);
+                lat = atof(token);
+                printf("lat: %f, ", lat);
             }
-            else if (strcmp(token, "y") == 0)
+            else if (strcmp(token, "lng") == 0)
             {
                 token = strtok(NULL, delimiter);
-                y = atoi(token);
-                printf("y: %d, ", y);
+                lng = atof(token);
+                printf("lng: %f, ", lng);
             }
             else if (strcmp(token, "icon") == 0)
             {
                 token = strtok(NULL, delimiter);
                 icon = atoi(token);
                 printf("icon: %d\n", icon);
-                Display_BMP_Short2(Init_Target_Memory_Addr, x, y, icon);
+                Display_BMP_Short2(Init_Target_Memory_Addr,lat,lng,icon);;
+                //Display_BMP_Short2(Init_Target_Memory_Addr, x, y, icon);
                 DEV_Delay_ms(200);
 
                 // Display_BMP_HST(Panel_Width, Panel_Height, Init_Target_Memory_Addr, BitsPerPixel_4,x,y);

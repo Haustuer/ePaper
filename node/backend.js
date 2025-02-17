@@ -29,23 +29,23 @@ app.get('/', (req, res) => {
 
       objectsToDraw=[];
       trackedObjects.ships.forEach((thing)=>{
-       const result = mercatorProjection(thing.position[0], thing.position[1]);
+      // const result = mercatorProjection(thing.position[0], thing.position[1]);
        // const result = scaleToMap(result1[0], result1[1]);
-        let newThing={"x":Math.round((wid*result[0])/100),"y":Math.round((hig*result[1])/100),"icon":2};
+        let newThing={"lat":Math.round(thing.position[0]),"lng":Math.round(thing.position[1]),"icon":2};
 
         objectsToDraw.push(newThing);
       })
       trackedObjects.planes.forEach((thing)=>{
-        const result = mercatorProjection(thing.position[0], thing.position[1]);
+      //  const result = mercatorProjection(thing.position[0], thing.position[1]);
        //const result = scaleToMap(result1[0], result1[1]);
-       let newThing={"x":Math.round((wid*result[0])/100),"y":Math.round((hig*result[1])/100),"icon":3};
+       let newThing={"lat":Math.round(thing.position[0]),"lng":Math.round(thing.position[1]),"icon":2};
 
        objectsToDraw.push(newThing);
       })
       trackedObjects.otherObjects.forEach((thing)=>{
-        const result = mercatorProjection(thing.position[0], thing.position[1]);
+      //  const result = mercatorProjection(thing.position[0], thing.position[1]);
       //  const result = scaleToMap(result1[0], result1[1]);
-      let newThing={"x":Math.round((wid*result[0])/100),"y":Math.round((hig*result[1])/100),"icon":1};
+      let newThing={"lat":Math.round(thing.position[0]),"lng":Math.round(thing.position[1]),"icon":2};
 
       objectsToDraw.push(newThing);
       })
@@ -91,7 +91,7 @@ const R = 6371.0; // Radius of the Earth in kilometers
 function toRadians(degrees) {
     return degrees * Math.PI / 180.0;
 }
-
+/*
 // Mercator projection function
 function mercatorProjection(latitude, longitude) {
     const phi = toRadians(latitude);   // Convert latitude to radians
@@ -106,7 +106,7 @@ function mercatorProjection(latitude, longitude) {
     const yPercent = ((phi + (Math.PI / 2.0)) / Math.PI) * 100.0;
 
     return [ xPercent, yPercent ];
-}
+}*/
   /* ---------------------------------------------
      Connecting and handling AIS Stream API
    --------------------------------------------- */
