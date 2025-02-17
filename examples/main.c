@@ -283,7 +283,7 @@ int main(int argc, char *argv[])
     for (double lat = -90.0; lat <= 90.0; lat += 15.0) {
         for (double lon = -180.0; lon <= 180.0; lon += 30.0) {
 
-                rcatorProjection(lon, lat, center_meridian, min_lat, max_lat, canvas_width, canvas_height, &x, &y);
+                mercatorProjection(lon, lat, center_meridian, min_lat, max_lat, canvas_width, canvas_height, &x, &y);
 
    
           //  mercator_projection(lat, lon, canvas_width, canvas_height, min_lat,max_lat, center_meridian, &x, &y);     
