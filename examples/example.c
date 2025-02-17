@@ -292,9 +292,9 @@ parameter:
 UBYTE Display_BMP_Short( UDOUBLE Init_Target_Memory_Addr ,int x, int y, int w, int h)
 {
     UWORD WIDTH;
-    
+
     UBYTE BitsPerPixel = BitsPerPixel_8;
-    UDOUBLE Init_Target_Memory_Addr = Dev_Info.Memory_Addr_L | (Dev_Info.Memory_Addr_H << 16);
+  //  UDOUBLE Init_Target_Memory_Addr = Dev_Info.Memory_Addr_L | (Dev_Info.Memory_Addr_H << 16);
     UWORD Panel_Width = 1872;
     UWORD Panel_Height = 1404;
     if (Four_Byte_Align == true)
