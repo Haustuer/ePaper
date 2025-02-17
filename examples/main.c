@@ -110,7 +110,9 @@ int main(int argc, char *argv[])
     Init_Target_Memory_Addr = Dev_Info.Memory_Addr_L | (Dev_Info.Memory_Addr_H << 16);
     A2_Mode = 6;
     Debug("A2 Mode:%d\r\n", A2_Mode);
-
+    int x;
+    int y;
+    
     switch (temp)
     {
     case 1:
@@ -188,8 +190,7 @@ int main(int argc, char *argv[])
         // Assuming the JSON format is: [{"x":50,"y":25,"icon":2},{"x":20,"y":70,"icon":1},{"x":20,"y":90,"icon":2}]
         const char *delimiter = ",:{}[]\"";
         char *token = strtok(json_start, delimiter);
-        int x;
-        int y;
+      
         int icon;
         while (token != NULL)
         {
@@ -219,6 +220,24 @@ int main(int argc, char *argv[])
 
       
         break;
+
+        case 4:
+             x=200;;
+         y=100;
+        Display_BMP_HST(100, 100, Init_Target_Memory_Addr, BitsPerPixel_4,x,y);
+        break;
+        case 5:
+         x=900;;
+         y=300;
+        Display_BMP_HST1(100, 100, Init_Target_Memory_Addr, BitsPerPixel_4,x,y);
+        break;
+        case 6:
+        x=600;;
+         y=1200;
+        Display_BMP_HST1(100, 100, Init_Target_Memory_Addr, BitsPerPixel_8,x,y);
+        break;
+
+
 
     default:
         EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, INIT_Mode);
