@@ -23,8 +23,11 @@ int epd_mode = 1; // 1: no rotate, horizontal mirror, for 10.3inch
 
 #define PI 3.14159265358979323846
 
-void mercator_projection(double lat, double lon, int canvas_width, int canvas_height, double min_lat, double center_meridian, int *x, int *y) {
+void mercator_projection(double lat, double lon,   int *x, int *y) {
     // Convert latitude and longitude to radians
+    int canvas_width = 1872;          // Canvas width in pixels
+    int canvas_height = 1404;         // Canvas height in pixels
+    double center_meridian=0;
     double rad_lat = lat * PI / 180.0;
     double rad_lon = lon * PI / 180.0;
     double rad_center_meridian = center_meridian * PI / 180.0;
@@ -251,15 +254,11 @@ int main(int argc, char *argv[])
             {
                 token = strtok(NULL, delimiter);
                 icon = atoi(token);
-                printf("icon: %d\n", icon);
-                double lat = 45.0;               // Latitude in degrees
-                double lon = -122.0;             // Longitude in degrees
-                int canvas_width = 1872;          // Canvas width in pixels
-                int canvas_height = 1404;         // Canvas height in pixels
-                double min_lat = -85.05112878;   // Minimum latitude for Mercator projection
-                double center_meridian = 0.0;    // Center meridian in degrees
+                printf("icon: %d\n", icon);              
+              
+           
 
-                mercator_projection(lat, lon, canvas_width, canvas_height, min_lat, center_meridian, &x, &y);     
+                mercator_projection(lat, lng, &x, &y);     
 
                 Display_BMP_Short2(Init_Target_Memory_Addr,x,y,icon);;
                 //Display_BMP_Short2(Init_Target_Memory_Addr, x, y, icon);
@@ -288,23 +287,16 @@ int main(int argc, char *argv[])
         Display_BMP_Short(Init_Target_Memory_Addr, x, y, 3, 4);
         break;
 
-    case 9:
+    case 9:        
+    
 
-        
-       double lat = 45.0;               // Latitude in degrees
-       double lon = -122.0;             // Longitude in degrees
-       int canvas_width = 1872;          // Canvas width in pixels
-       int canvas_height = 1404;         // Canvas height in pixels
-       double min_lat = -85.05112878;   // Minimum latitude for Mercator projection
-       double center_meridian = 0.0;    // Center meridian in degrees
-
-       int x, y;      
-    char buffer[40];
+     
+      char buffer[40];
 
  
     for (double lat = -90.0; lat <= 90.0; lat += 15.0) {
         for (double lon = -180.0; lon <= 180.0; lon += 30.0) {
-            mercator_projection(lat, lon, canvas_width, canvas_height, min_lat, center_meridian, &x, &y);     
+            mercator_projection(lat, lon,  &x, &y);     
             snprintf(buffer, 40, "Canvas coordinates: (%d, %d)\n", lat, lon);
 
             Display_Text_Short(Init_Target_Memory_Addr,buffer,x,y,0,0);
