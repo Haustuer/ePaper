@@ -272,11 +272,17 @@ int main(int argc, char *argv[])
        int canvas_height = 1404;         // Canvas height in pixels
        double min_lat = -85.05112878;   // Minimum latitude for Mercator projection
        double center_meridian = 0.0;    // Center meridian in degrees
-   
+    
        int x, y;
        mercator_projection(lat, lon, canvas_width, canvas_height, min_lat, center_meridian, &x, &y);      
-       Display_BMP_Short2(Init_Target_Memory_Addr, x, y, 2);
+       //splay_BMP_Short2(Init_Target_Memory_Addr, x, y, 2);
 
+    char buffer[40];
+    snprintf(buffer, 40, "Canvas coordinates: (%d, %d)\n", lat, lon);
+
+    
+
+       Paint_DrawString_EN(x, y, buffer, &Font24, 0xF0, 0x00);
 
 
         lat = -60.0;               // Latitude in degrees
