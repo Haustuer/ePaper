@@ -25,21 +25,22 @@ int epd_mode = 1; // 1: no rotate, horizontal mirror, for 10.3inch
 #define PI 3.14159265358979323846
 
 void mercatorProjection(double lon, double lat, double centerMeridian, double minLat, double maxLat, double canvasWidth, double canvasHeight, double *x, double *y){
-    // Convert latitude and longitude to radians
-    lon = (lon - centerMeridian) * PI / 180.0;
-    lat = lat * PI / 180.0;
+    {
+        // Convert latitude and longitude to radians
+        lon = (lon - centerMeridian) * PI / 180.0;
+        lat = lat * PI / 180.0;
+        
+        // Calculate Mercator coordinates
+        *x = (canvasWidth / (2 * PI)) * (lon + PI); 
+        *y = (canvasHeight / (2 * PI)) * (PI - log(tan(PI / 4.0 + lat / 2.0)));
     
-    // Calculate Mercator coordinates
-    *x = (canvasWidth / (2 * PI)) * (lon + PI); 
-    *y = (canvasHeight / (PI)) * (PI - log(tan(PI / 4.0 + lat / 2.0)));
-
-    // Normalize y coordinate based on min and max latitude
-    double minLatRad = minLat * PI / 180.0;
-    double maxLatRad = maxLat * PI / 180.0;
-    double minY = (canvasHeight / (PI)) * (PI - log(tan(PI / 4.0 + minLatRad / 2.0)));
-    double maxY = (canvasHeight / (PI)) * (PI - log(tan(PI / 4.0 + maxLatRad / 2.0)));
-    
-    *y = ((*y - minY) / (maxY - minY)) * canvasHeight;
+        // Normalize y coordinate based on min and max latitude
+        double minLatRad = minLat * PI / 180.0;
+        double maxLatRad = maxLat * PI / 180.0;
+        double minY = (canvasHeight / (2 * PI)) * (PI - log(tan(PI / 4.0 + minLatRad / 2.0)));
+        double maxY = (canvasHeight / (2 * PI)) * (PI - log(tan(PI / 4.0 + maxLatRad / 2.0)));
+        
+        *y = ((*y - minY) / (maxY - minY))  * canvasHeight;
 }
 
 
