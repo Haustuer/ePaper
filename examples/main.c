@@ -212,7 +212,7 @@ int main(int argc, char *argv[])
                 icon = atoi(token);
                 printf("icon: %d\n", icon);
                 Display_BMP_Short(Init_Target_Memory_Addr, x, y, 3, 4);
-                  DEV_Delay_ms(100);
+                  DEV_Delay_ms(200);
 
                 //Display_BMP_HST(Panel_Width, Panel_Height, Init_Target_Memory_Addr, BitsPerPixel_4,x,y);
 
