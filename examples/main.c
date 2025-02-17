@@ -25,7 +25,7 @@ int epd_mode = 1; // 1: no rotate, horizontal mirror, for 10.3inch
 #define PI 3.14159265358979323846
 
 void mercatorProjection(double lon, double lat, double centerMeridian, double minLat, double maxLat, double canvasWidth, double canvasHeight, double *x, double *y){
-    {
+    
         // Convert latitude and longitude to radians
         lon = (lon - centerMeridian) * PI / 180.0;
         lat = lat * PI / 180.0;
