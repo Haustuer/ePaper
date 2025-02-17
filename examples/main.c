@@ -29,13 +29,23 @@ void mercator_projection(double lat, double lon, int canvas_width, int canvas_he
     double rad_lon = lon * PI / 180.0;
     double rad_center_meridian = center_meridian * PI / 180.0;
 
+
+    
+
+    double vrad_lat = rad_lat;
+
     // Calculate the Mercator projection
     double x_pos = canvas_width / 2.0 + (rad_lon - rad_center_meridian) * (canvas_width / (2.0 * PI));
-    double y_pos = canvas_height / 2.0 - canvas_height / (2.0 * PI) * log(tan(PI / 4.0 + rad_lat / 2.0));
+    double y_pos = canvas_height / 2.0 - canvas_height / (2.0 * PI) * log(tan(PI / 4.0 + vrad_lat / 2.0));
+
+    Debug(" Transforming(lat:%d,lon:%d) to pos[%d,%d]",lat,lon,x_pos,y_pos);
 
     // Clip coordinates to fit within the canvas
     *x = (int)fmin(fmax(x_pos, 0), canvas_width - 1);
     *y = (int)fmin(fmax(y_pos, 0), canvas_height - 1);
+
+
+
 }
 
 
@@ -269,7 +279,7 @@ int main(int argc, char *argv[])
        int x, y;      
     char buffer[40];
 
-    for (double lat = -90.0; lat <= 90.0; lat += 30.0) {
+ 
     for (double lat = -90.0; lat <= 90.0; lat += 15.0) {
         for (double lon = -180.0; lon <= 180.0; lon += 30.0) {
             mercator_projection(lat, lon, canvas_width, canvas_height, min_lat, center_meridian, &x, &y);     
@@ -278,7 +288,7 @@ int main(int argc, char *argv[])
             Display_Text_Short(Init_Target_Memory_Addr,buffer,x,y,0,0);
         }
 
-    }}
+    }
 
         break;
 
