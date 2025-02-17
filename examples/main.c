@@ -32,6 +32,8 @@ void mercatorProjection(double lon, double lat, double *virtualX, double *virtua
     // Calculate virtual Mercator coordinates
     *virtualX = lon;
     *virtualY = log(tan(PI / 4.0 + lat / 2.0));
+
+    Debug("lat:%d, lon: %d  tarnsformed to virtualX:%d, virtualY: %d  \r\n", lat,lon  ,virtualY,virtualX);
 }
 
 void transformToCanvas(double virtualX, double virtualY, double minX, double maxX, double minY, double maxY, double canvasWidth, double canvasHeight, double *canvasX, double *canvasY)
