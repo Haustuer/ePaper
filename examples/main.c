@@ -278,6 +278,7 @@ int main(int argc, char *argv[])
 
     for (double lat = -90.0; lat <= 90.0; lat += 30.0) {
         for (double lon = -180.0; lon <= 180.0; lon += 30.0) {
+            mercator_projection(lat, lon, canvas_width, canvas_height, min_lat, center_meridian, &x, &y);     
             snprintf(buffer, 40, "Canvas coordinates: (%d, %d)\n", lat, lon);
 
             Display_Text_Short(Init_Target_Memory_Addr,buffer,x,y,0,0);
