@@ -396,6 +396,66 @@ UBYTE Display_BMP_Short( UDOUBLE Init_Target_Memory_Addr ,int x, int y, int w, i
     return 0;
 }
 
+
+/******************************************************************************
+function: Display_BMP_Example
+parameter:
+    Panel_Width: Width of the panel
+    Panel_Height: Height of the panel
+    Init_Target_Memory_Addr: Memory address of IT8951 target memory address
+    BitsPerPixel: Bits Per Pixel, 2^BitsPerPixel = grayscale
+******************************************************************************/
+UBYTE Display_Text_Short( UDOUBLE Init_Target_Memory_Addr ,  char *buffer,int x, int y, int w, int h)
+{
+    UWORD WIDTH;
+
+    UBYTE BitsPerPixel = BitsPerPixel_8;
+  //  UDOUBLE Init_Target_Memory_Addr = Dev_Info.Memory_Addr_L | (Dev_Info.Memory_Addr_H << 16);
+    UWORD Panel_Width =  200;//1872;
+    UWORD Panel_Height = 13;// 1404;
+    if (Four_Byte_Align == true)
+    {
+        WIDTH = Panel_Width - (Panel_Width % 32);
+    }
+    else
+    {
+        WIDTH = Panel_Width;
+    }
+    UWORD HEIGHT = Panel_Height;
+
+    UDOUBLE Imagesize;
+
+    Imagesize = ((WIDTH * BitsPerPixel % 8 == 0) ? (WIDTH * BitsPerPixel / 8) : (WIDTH * BitsPerPixel / 8 + 1)) * HEIGHT;
+    if ((Refresh_Frame_Buf = (UBYTE *)malloc(Imagesize)) == NULL)
+    {
+        Debug("Failed to apply for black memory...\r\n");
+        return -1;
+    }
+
+    Paint_NewImage(Refresh_Frame_Buf, WIDTH, HEIGHT, 0, BLACK);
+    Paint_SelectImage(Refresh_Frame_Buf);
+    Epd_Mode(epd_mode);
+    Paint_SetBitsPerPixel(BitsPerPixel);
+    // Paint_Clear(WHITE);
+
+    
+    
+
+    
+    Paint_DrawString_EN(x, y, buffer, &Font24, 0xF0, 0x00);
+
+    EPD_IT8951_8bp_Refresh(Refresh_Frame_Buf, x, y, WIDTH, HEIGHT, false, Init_Target_Memory_Addr);
+
+    if (Refresh_Frame_Buf != NULL)
+    {
+        free(Refresh_Frame_Buf);
+        Refresh_Frame_Buf = NULL;
+    }
+
+    return 0;
+}
+
+
 /******************************************************************************
 function: Display_BMP_HST
 parameter:
