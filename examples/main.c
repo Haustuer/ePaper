@@ -282,8 +282,7 @@ int main(int argc, char *argv[])
 
     
 
-       Paint_DrawString_EN(x, y, buffer, &Font24, 0xF0, 0x00);
-
+      
 
         lat = -60.0;               // Latitude in degrees
         lon = -120.0;   
