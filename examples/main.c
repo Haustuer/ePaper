@@ -29,8 +29,8 @@ void mercator_projection(double lat, double lon, int canvas_width, int canvas_he
     double rad_lon = lon * PI / 180.0;
     double rad_center_meridian = center_meridian * PI / 180.0;
 
-    double minlat=-87;
-    double maxlat= 87;
+    double minlat=-60;
+    double maxlat= 75;
     double rad_minlat=minlat * PI / 180.0;
     double rad_maxlat=maxlat * PI / 180.0;
 
