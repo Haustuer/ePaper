@@ -315,14 +315,13 @@ int main(int argc, char *argv[])
     double subsetMinX, subsetMaxX, subsetMinY, subsetMaxY;
     mercatorProjection(subsetMinLon, subsetMinLat, &subsetMinX, &subsetMinY);
     mercatorProjection(subsetMaxLon, subsetMaxLat, &subsetMaxX, &subsetMaxY);
-
     transformToCanvas(virtualX, virtualY, subsetMinX, subsetMaxX, subsetMinY, subsetMaxY, canvasWidth, canvasHeight, &canvasX, &canvasY);
 
    
           //  mercator_projection(lat, lon, canvas_width, canvas_height, min_lat,max_lat, center_meridian, &x, &y);     
             snprintf(buffer, 40, "Canvas coordinates: (%d, %d)\n", lat, lon);
 
-            Display_Text_Short(Init_Target_Memory_Addr,buffer,x,y,0,0);
+            Display_Text_Short(Init_Target_Memory_Addr,buffer,canvasX,canvasY,0,0);
         }
     
     }
