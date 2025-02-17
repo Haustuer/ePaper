@@ -442,7 +442,7 @@ UBYTE Display_Text_Short( UDOUBLE Init_Target_Memory_Addr ,  char *buffer,int x,
     
 
     
-    Paint_DrawString_EN(x, y, buffer, &Font24, 0xF0, 0x00);
+    //Paint_DrawString_EN(x, y, buffer, &Font24, 0xF0, 0x00);
 
     EPD_IT8951_8bp_Refresh(Refresh_Frame_Buf, x, y, WIDTH, HEIGHT, false, Init_Target_Memory_Addr);
 
