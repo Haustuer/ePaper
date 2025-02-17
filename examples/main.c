@@ -24,25 +24,21 @@ int epd_mode = 1; // 1: no rotate, horizontal mirror, for 10.3inch
 
 #define PI 3.14159265358979323846
 
-void mercatorProjection(double lon, double lat, double centerMeridian, double minLat, double maxLat, double canvasWidth, double canvasHeight, double *x, double *y){
+void mercatorProjection(double lon, double lat, double *virtualX, double *virtualY) {
+    // Convert latitude and longitude to radians
+    lon = lon * PI / 180.0;
+    lat = lat * PI / 180.0;
     
-        // Convert latitude and longitude to radians
-        lon = (lon - centerMeridian) * PI / 180.0;
-        lat = lat * PI / 180.0;
-        
-        // Calculate Mercator coordinates
-        *x = (canvasWidth / (2 * PI)) * (lon + PI); 
-        *y = (canvasHeight / (2 * PI)) * (PI - log(tan(PI / 4.0 + lat / 2.0)));
-    
-        // Normalize y coordinate based on min and max latitude
-        double minLatRad = minLat * PI / 180.0;
-        double maxLatRad = maxLat * PI / 180.0;
-        double minY = (canvasHeight / (2 * PI)) * (PI - log(tan(PI / 4.0 + minLatRad / 2.0)));
-        double maxY = (canvasHeight / (2 * PI)) * (PI - log(tan(PI / 4.0 + maxLatRad / 2.0)));
-        
-        *y = ((*y - minY) / (maxY - minY))  * canvasHeight;
+    // Calculate virtual Mercator coordinates
+    *virtualX = lon;
+    *virtualY = log(tan(PI / 4.0 + lat / 2.0));
 }
 
+void transformToCanvas(double virtualX, double virtualY, double minX, double maxX, double minY, double maxY, double canvasWidth, double canvasHeight, double *canvasX, double *canvasY) {
+    // Normalize virtual coordinates to canvas coordinates
+    *canvasX = ((virtualX - minX) / (maxX - minX)) * canvasWidth;
+    *canvasY = ((virtualY - minY) / (maxY - minY)) * canvasHeight;
+}
 
 
 
@@ -277,6 +273,31 @@ int main(int argc, char *argv[])
        double max_lat = 60.0;           // Maximum latitude
        double min_lat = -60;   // Minimum latitude for Mercator projection
        double center_meridian = 0.0;    // Center meridian in degrees
+
+
+       
+        double lon, lat;
+        double virtualX, virtualY;
+        double canvasX, canvasY;
+        double canvasWidth = 1872;   // Target canvas width
+        double canvasHeight = 1404;     
+
+        // Define the map bounds (longitude and latitude)
+    double mapMinLon = -180.0;
+    double mapMaxLon = 180.0;
+    double mapMinLat = -85.05112878;  // Min latitude for Mercator projection
+    double mapMaxLat = 85.05112878;   // Max latitude for Mercator projection
+
+
+
+    // Define the canvas subset bounds
+    double subsetMinLon = -180.0;
+    double subsetMaxLon = 120.0;
+    double subsetMinLat = -60.0;
+    double subsetMaxLat = 30.0
+
+
+
     
        int x, y;      
     char buffer[40];
@@ -284,7 +305,18 @@ int main(int argc, char *argv[])
     for (double lat = -90.0; lat <= 90.0; lat += 15.0) {
         for (double lon = -180.0; lon <= 180.0; lon += 30.0) {
 
-                mercatorProjection(lon, lat, center_meridian, min_lat, max_lat, canvas_width, canvas_height, &x, &y);
+               // mercatorProjection(lon, lat, center_meridian, min_lat, max_lat, canvas_width, canvas_height, &x, &y);
+
+             
+
+    mercatorProjection(lon, lat, &virtualX, &virtualY);    
+
+    // Calculate virtual bounds for the subset
+    double subsetMinX, subsetMaxX, subsetMinY, subsetMaxY;
+    mercatorProjection(subsetMinLon, subsetMinLat, &subsetMinX, &subsetMinY);
+    mercatorProjection(subsetMaxLon, subsetMaxLat, &subsetMaxX, &subsetMaxY);
+
+    transformToCanvas(virtualX, virtualY, subsetMinX, subsetMaxX, subsetMinY, subsetMaxY, canvasWidth, canvasHeight, &canvasX, &canvasY);
 
    
           //  mercator_projection(lat, lon, canvas_width, canvas_height, min_lat,max_lat, center_meridian, &x, &y);     
