@@ -239,7 +239,7 @@ int main(int argc, char *argv[])
         case 7:
         x=600;;
          y=100;
-        Display_BMP_HST1(114, 138, Init_Target_Memory_Addr, BitsPerPixel_4,x,y);
+        Display_BMP_HST1(Panel_Width, Panel_Height, Init_Target_Memory_Addr, BitsPerPixel_4,x,y);
         break;
 
 
