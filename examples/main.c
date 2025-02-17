@@ -229,7 +229,7 @@ int main(int argc, char *argv[])
         case 5:
          x=300;;
          y=300;
-        Display_BMP_HST1(100, 100, Init_Target_Memory_Addr, BitsPerPixel_4,x,y);
+        Display_BMP_HST1(600, 600, Init_Target_Memory_Addr, BitsPerPixel_4,x,y);
         break;
         case 6:
         x=600;;
