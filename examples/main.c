@@ -24,19 +24,22 @@ int epd_mode = 1; // 1: no rotate, horizontal mirror, for 10.3inch
 
 #define PI 3.14159265358979323846
 
-void mercator_projection(double lat, double lon, int canvas_width, int canvas_height, double min_lat, double center_meridian, int *x, int *y) {
+void mercatorProjection(double lon, double lat, double centerMeridian, double minLat, double maxLat, double canvasWidth, double canvasHeight, double *x, double *y){
     // Convert latitude and longitude to radians
-    double rad_lat = lat * PI / 180.0;
-    double rad_lon = lon * PI / 180.0;
-    double rad_center_meridian = center_meridian * PI / 180.0;
+    lon = (lon - centerMeridian) * PI / 180.0;
+    lat = lat * PI / 180.0;
+    
+    // Calculate Mercator coordinates
+    *x = (canvasWidth / (2 * PI)) * (lon + PI); 
+    *y = (canvasHeight / (PI)) * (PI - log(tan(PI / 4.0 + lat / 2.0)));
 
-    // Calculate the Mercator projection
-    double x_pos = canvas_width / 2.0 + (rad_lon - rad_center_meridian) * (canvas_width / (2.0 * PI));
-    double y_pos = canvas_height / 2.0 - canvas_height / (2.0 * PI) * log(tan(PI / 4.0 + rad_lat / 2.0));
-
-    // Clip coordinates to fit within the canvas
-    *x = (int)fmin(fmax(x_pos, 0), canvas_width - 1);
-    *y = (int)fmin(fmax(y_pos, 0), canvas_height - 1);
+    // Normalize y coordinate based on min and max latitude
+    double minLatRad = minLat * PI / 180.0;
+    double maxLatRad = maxLat * PI / 180.0;
+    double minY = (canvasHeight / (PI)) * (PI - log(tan(PI / 4.0 + minLatRad / 2.0)));
+    double maxY = (canvasHeight / (PI)) * (PI - log(tan(PI / 4.0 + maxLatRad / 2.0)));
+    
+    *y = ((*y - minY) / (maxY - minY)) * canvasHeight;
 }
 
 
@@ -270,7 +273,8 @@ int main(int argc, char *argv[])
        double lon = -122.0;             // Longitude in degrees
        int canvas_width = 1872;          // Canvas width in pixels
        int canvas_height = 1404;         // Canvas height in pixels
-       double min_lat = -85.05112878;   // Minimum latitude for Mercator projection
+       double max_lat = 60.0;           // Maximum latitude
+       double min_lat = -60;   // Minimum latitude for Mercator projection
        double center_meridian = 0.0;    // Center meridian in degrees
     
        int x, y;      
@@ -278,7 +282,11 @@ int main(int argc, char *argv[])
 
     for (double lat = -90.0; lat <= 90.0; lat += 15.0) {
         for (double lon = -180.0; lon <= 180.0; lon += 30.0) {
-            mercator_projection(lat, lon, canvas_width, canvas_height, min_lat, center_meridian, &x, &y);     
+
+                rcatorProjection(lon, lat, center_meridian, min_lat, max_lat, canvas_width, canvas_height, &x, &y);
+
+   
+          //  mercator_projection(lat, lon, canvas_width, canvas_height, min_lat,max_lat, center_meridian, &x, &y);     
             snprintf(buffer, 40, "Canvas coordinates: (%d, %d)\n", lat, lon);
 
             Display_Text_Short(Init_Target_Memory_Addr,buffer,x,y,0,0);
