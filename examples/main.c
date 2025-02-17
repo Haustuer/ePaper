@@ -244,13 +244,13 @@ int main(int argc, char *argv[])
         case 8:
         x=300;;
         y=300;
-        Display_BMP_Short(Panel_Width, Panel_Height, Init_Target_Memory_Addr, BitsPerPixel_4);
+        Display_BMP_Short(Init_Target_Memory_Addr, 2, 2, 3, 4);
        break;
 
        case 9:
        x=300;;
        y=300;
-       Display_BMP_Short(Panel_Width, Panel_Height, Init_Target_Memory_Addr, BitsPerPixel_8);
+       Display_BMP_Short(Init_Target_Memory_Addr, 1, 2, 3, 4);
       break;
 
 

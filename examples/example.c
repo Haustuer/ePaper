@@ -289,13 +289,14 @@ parameter:
     Init_Target_Memory_Addr: Memory address of IT8951 target memory address
     BitsPerPixel: Bits Per Pixel, 2^BitsPerPixel = grayscale
 ******************************************************************************/
-UBYTE Display_BMP_Short(int x, int y, int w, int h)
+UBYTE Display_BMP_Short( UDOUBLE Init_Target_Memory_Addr ,int x, int y, int w, int h)
 {
     UWORD WIDTH;
+    
     UBYTE BitsPerPixel = BitsPerPixel_8;
     UDOUBLE Init_Target_Memory_Addr = Dev_Info.Memory_Addr_L | (Dev_Info.Memory_Addr_H << 16);
-    UWORD Panel_Width = Dev_Info.Panel_W;
-    UWORD Panel_Height = Dev_Info.Panel_H;
+    UWORD Panel_Width = 1872;
+    UWORD Panel_Height = 1404;
     if (Four_Byte_Align == true)
     {
         WIDTH = Panel_Width - (Panel_Width % 32);
