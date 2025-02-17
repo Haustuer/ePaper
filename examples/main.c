@@ -38,7 +38,7 @@ void mercator_projection(double lat, double lon, int canvas_width, int canvas_he
     double Mmaxlat = log(tan(PI / 4.0 + rad_maxlat / 2.0));
     double Mlat = log(tan(PI / 4.0 + rad_lat / 2.0));
 
-    double norm=(y - minY) / (maxY - minY);
+    double norm=(Mlat - Mminlat) / (Mmaxlat - Mminlat);
 
 
 
