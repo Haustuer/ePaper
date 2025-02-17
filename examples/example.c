@@ -295,8 +295,8 @@ UBYTE Display_BMP_Short( UDOUBLE Init_Target_Memory_Addr ,int x, int y, int w, i
 
     UBYTE BitsPerPixel = BitsPerPixel_8;
   //  UDOUBLE Init_Target_Memory_Addr = Dev_Info.Memory_Addr_L | (Dev_Info.Memory_Addr_H << 16);
-    UWORD Panel_Width =  300;//1872;
-    UWORD Panel_Height = 300;// 1404;
+    UWORD Panel_Width =  114;//1872;
+    UWORD Panel_Height = 138;// 1404;
     if (Four_Byte_Align == true)
     {
         WIDTH = Panel_Width - (Panel_Width % 32);
