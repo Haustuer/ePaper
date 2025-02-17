@@ -241,6 +241,17 @@ int main(int argc, char *argv[])
          y=100;
          Display_BMP_HST1(Panel_Width, Panel_Height, Init_Target_Memory_Addr, BitsPerPixel_8,x,y);
         break;
+        case 8:
+        x=300;;
+        y=300;
+        Display_BMP_Short(Panel_Width, Panel_Height, Init_Target_Memory_Addr, BitsPerPixel_4);
+       break;
+
+       case 9:
+       x=300;;
+       y=300;
+       Display_BMP_Short(Panel_Width, Panel_Height, Init_Target_Memory_Addr, BitsPerPixel_8);
+      break;
 
 
     default:
