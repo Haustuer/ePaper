@@ -252,7 +252,16 @@ int main(int argc, char *argv[])
                 token = strtok(NULL, delimiter);
                 icon = atoi(token);
                 printf("icon: %d\n", icon);
-                Display_BMP_Short2(Init_Target_Memory_Addr,lat,lng,icon);;
+                double lat = 45.0;               // Latitude in degrees
+                double lon = -122.0;             // Longitude in degrees
+                int canvas_width = 1872;          // Canvas width in pixels
+                int canvas_height = 1404;         // Canvas height in pixels
+                double min_lat = -85.05112878;   // Minimum latitude for Mercator projection
+                double center_meridian = 0.0;    // Center meridian in degrees
+
+                mercator_projection(lat, lon, canvas_width, canvas_height, min_lat, center_meridian, &x, &y);     
+
+                Display_BMP_Short2(Init_Target_Memory_Addr,x,y,icon);;
                 //Display_BMP_Short2(Init_Target_Memory_Addr, x, y, icon);
                 DEV_Delay_ms(200);
 
