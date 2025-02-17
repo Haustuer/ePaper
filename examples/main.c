@@ -38,7 +38,7 @@ void mercator_projection(double lat, double lon, int canvas_width, int canvas_he
     double x_pos = canvas_width / 2.0 + (rad_lon - rad_center_meridian) * (canvas_width / (2.0 * PI));
     double y_pos = canvas_height / 2.0 - canvas_height / (2.0 * PI) * log(tan(PI / 4.0 + vrad_lat / 2.0));
 
-    Debug(" Transforming(lat:%d,lon:%d) to pos[%d,%d]",lat,lon,x_pos,y_pos);
+    Debug(" Transforming(lat:%f,lon:%f) to pos[%f,%f]",lat,lon,x_pos,y_pos);
 
     // Clip coordinates to fit within the canvas
     *x = (int)fmin(fmax(x_pos, 0), canvas_width - 1);
