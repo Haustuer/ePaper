@@ -432,7 +432,7 @@ parameter:
     BitsPerPixel: Bits Per Pixel, 2^BitsPerPixel = grayscale
 ******************************************************************************/
 
-UBYTE Display_BMP_Shor2( UDOUBLE Init_Target_Memory_Addr ,int x, int y,int icon)
+UBYTE Display_BMP_Short2( UDOUBLE Init_Target_Memory_Addr ,int x, int y,int icon)
 {
     UWORD WIDTH;
 
