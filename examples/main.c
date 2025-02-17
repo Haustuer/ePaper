@@ -112,7 +112,7 @@ int main(int argc, char *argv[])
     Debug("A2 Mode:%d\r\n", A2_Mode);
     int x;
     int y;
-    
+
     switch (temp)
     {
     case 1:
@@ -227,13 +227,13 @@ int main(int argc, char *argv[])
         Display_BMP_HST(100, 100, Init_Target_Memory_Addr, BitsPerPixel_4,x,y);
         break;
         case 5:
-         x=900;;
+         x=300;;
          y=300;
         Display_BMP_HST1(100, 100, Init_Target_Memory_Addr, BitsPerPixel_4,x,y);
         break;
         case 6:
         x=600;;
-         y=1200;
+         y=100;
         Display_BMP_HST1(100, 100, Init_Target_Memory_Addr, BitsPerPixel_8,x,y);
         break;
 
