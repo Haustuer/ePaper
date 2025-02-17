@@ -411,7 +411,7 @@ UBYTE Display_Text_Short( UDOUBLE Init_Target_Memory_Addr ,  char *buffer,int x,
 
     UBYTE BitsPerPixel = BitsPerPixel_8;
   //  UDOUBLE Init_Target_Memory_Addr = Dev_Info.Memory_Addr_L | (Dev_Info.Memory_Addr_H << 16);
-    UWORD Panel_Width =  200;//1872;
+    UWORD Panel_Width =  20;//1872;
     UWORD Panel_Height = 20;// 1404;
     if (Four_Byte_Align == true)
     {
@@ -440,9 +440,9 @@ UBYTE Display_Text_Short( UDOUBLE Init_Target_Memory_Addr ,  char *buffer,int x,
 
     
     
-
+    //Paint_DrawString_EN(x, y, buffer, &Font24, 0xF0, 0x00);
     
-    Paint_DrawString_EN(x, y, buffer, &Font24, 0xF0, 0x00);
+    Paint_DrawString_EN(x, y, "x", &Font24, 0xF0, 0x00);
 
     EPD_IT8951_8bp_Refresh(Refresh_Frame_Buf, x, y, WIDTH, HEIGHT, false, Init_Target_Memory_Addr);
 
