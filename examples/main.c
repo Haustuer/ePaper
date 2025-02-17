@@ -224,9 +224,11 @@ int main(int argc, char *argv[])
       
         break;
         case 7:
-        Dynamic_GIF_Example(Panel_Width, Panel_Height, Init_Target_Memory_Addr);
-        break;
-
+        
+        x=300;;
+        y=300;
+        Display_BMP_Patch(Init_Target_Memory_Addr, x, y, 20, 30);
+       break;
 
        
        case 8:
