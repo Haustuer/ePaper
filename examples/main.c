@@ -211,7 +211,7 @@ int main(int argc, char *argv[])
                 token = strtok(NULL, delimiter);
                 icon = atoi(token);
                 printf("icon: %d\n", icon);
-                Display_BMP_Short(Init_Target_Memory_Addr, x, y, 3, 4);
+                Display_BMP_Short2(Init_Target_Memory_Addr, x, y, 3, 4);
                   DEV_Delay_ms(200);
 
                 //Display_BMP_HST(Panel_Width, Panel_Height, Init_Target_Memory_Addr, BitsPerPixel_4,x,y);
@@ -227,7 +227,7 @@ int main(int argc, char *argv[])
         case 4:
              x=200;;
          y=100;
-        Display_BMP_HST(100, 100, Init_Target_Memory_Addr, BitsPerPixel_4,x,y);
+        Display_BMP_HST1(100, 100, Init_Target_Memory_Addr, BitsPerPixel_4,x,y);
         break;
         case 5:
          x=300;;
