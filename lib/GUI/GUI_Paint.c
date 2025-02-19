@@ -121,7 +121,12 @@ parameter:
 ******************************************************************************/
 void Paint_SetSizeMem(UWORD Width, UWORD Height)
 {   
+    
+    Debug("Set image size to %d x %d\r\n", Width, Height);
+    Debug("size to was  %d x %d\r\n", Paint.WidthMemory, Paint.HeightMemory);
     Paint.WidthMemory = Width;
+
+
     Paint.HeightMemory = Height;
 }
 
