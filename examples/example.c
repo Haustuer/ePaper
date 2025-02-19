@@ -449,7 +449,7 @@ UBYTE Display_BMP_Short3( UDOUBLE Init_Target_Memory_Addr ,int x, int y, int w, 
 
     GUI_ReadBmp(Path, 0, 0);   
 
-    EPD_IT8951_8bp_Refresh(Refresh_Frame_Buf, 0, 0, 1872, 600, false, Init_Target_Memory_Addr);
+    EPD_IT8951_8bp_Refresh(Refresh_Frame_Buf, 0, 200, 1872, 600, false, Init_Target_Memory_Addr);
 
     if (Refresh_Frame_Buf != NULL)
     {
