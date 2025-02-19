@@ -327,7 +327,7 @@ UBYTE Display_BMP_Patch( UDOUBLE Init_Target_Memory_Addr ,int x, int y, int w, i
     sprintf(Path, "./pic/%dx%d_2.bmp", 1872, 1404);
 
 
-    GUI_ReadBmp2(Path, 0, 0 );   
+    GUI_ReadBmp(Path, 0, 0 );   
     EPD_IT8951_8bp_Refresh(Refresh_Frame_Buf, x, y, w, h, false, Init_Target_Memory_Addr);
 
     if (Refresh_Frame_Buf != NULL)
