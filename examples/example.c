@@ -296,8 +296,8 @@ UBYTE Display_BMP_Patch( UDOUBLE Init_Target_Memory_Addr ,int x, int y, int w, i
 
     UBYTE BitsPerPixel = BitsPerPixel_8;
   //  UDOUBLE Init_Target_Memory_Addr = Dev_Info.Memory_Addr_L | (Dev_Info.Memory_Addr_H << 16);
-    UWORD Panel_Width =  w;//1872;
-    UWORD Panel_Height = h;// 1404;
+    UWORD Panel_Width =  1872;
+    UWORD Panel_Height = 1404;
     if (Four_Byte_Align == true)
     {
         WIDTH = Panel_Width - (Panel_Width % 32);
@@ -327,8 +327,8 @@ UBYTE Display_BMP_Patch( UDOUBLE Init_Target_Memory_Addr ,int x, int y, int w, i
     sprintf(Path, "./pic/%dx%d_2.bmp", 1872, 1404);
 
 
-    GUI_ReadBmp(Path, 0, 0);   
-    EPD_IT8951_8bp_Refresh(Refresh_Frame_Buf, x, y, WIDTH, HEIGHT, false, Init_Target_Memory_Addr);
+    GUI_ReadBmp2(Path, 0, 0 );   
+    EPD_IT8951_8bp_Refresh(Refresh_Frame_Buf, x, y, w, h, false, Init_Target_Memory_Addr);
 
     if (Refresh_Frame_Buf != NULL)
     {
