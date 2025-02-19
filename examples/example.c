@@ -448,9 +448,9 @@ UBYTE Display_BMP_Patch( UDOUBLE Init_Target_Memory_Addr ,int x, int y, int w, i
     char Path[30];
     sprintf(Path, "./pic/%dx%d_22.bmp", 1872, 1404);
 
-    GUI_ReadBmp2(Path, 0, 0,w,h);   
+    GUI_ReadBmp2(Path, x, y,w,h);   
 
-    EPD_IT8951_8bp_Refresh(Refresh_Frame_Buf, x, x, w, h, false, Init_Target_Memory_Addr);
+    EPD_IT8951_8bp_Refresh(Refresh_Frame_Buf, x, y, w, h, false, Init_Target_Memory_Addr);
 
     if (Refresh_Frame_Buf != NULL)
     {
