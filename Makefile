@@ -49,7 +49,6 @@ ${DIR_BIN}/%.o: ${DIR_FONTS}/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 ${DIR_BIN}/%.o: ${DIR_GUI}/%.c
-  @echo "Compiling $<"
 	$(CC) $(CFLAGS) -c $< -o $@
 
 ${DIR_BIN}/%.o: ${DIR_Examples}/%.c
