@@ -122,6 +122,8 @@ parameter:
 void Paint_SetSizeMem(UWORD Width, UWORD Height)
 {   
     
+    Paint.WidthByte = (Paint.WidthMemory * bpp % 8 == 0)? (Paint.WidthMemory * bpp / 8 ) : (Paint.WidthMemory * bpp / 8 + 1);
+
     Debug("Set image size to %d x %d\r\n", Width, Height);
     Debug("size to was  %d x %d\r\n", Paint.WidthMemory, Paint.HeightMemory);
     Paint.WidthMemory = Width;
@@ -169,12 +171,13 @@ parameter:
     Ypoint : At point Y
     Color  : Painted colors
 ******************************************************************************/
-void Paint_SetBitsPerPixel(UBYTE bpp)
+void Paint_SetTargetWidth(UWORD w)
 {
+    
+    UBYTE bpp= Paint.BitsPerPixel;
     if(bpp == 8 || bpp == 4 || bpp == 2 || bpp == 1){
-            Paint.BitsPerPixel = bpp;
-            Paint.GrayScale = pow(2, Paint.BitsPerPixel);
-            Paint.WidthByte = (Paint.WidthMemory * bpp % 8 == 0)? (Paint.WidthMemory * bpp / 8 ) : (Paint.WidthMemory * bpp / 8 + 1);
+           
+            Paint.WidthByte = (w* bpp % 8 == 0)? (w* bpp / 8 ) : (w* bpp / 8 + 1);
     }
     else{
         Debug("Set BitsPerPixel Input parameter error\r\n");
