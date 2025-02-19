@@ -118,7 +118,7 @@ void Paint_SelectImage(UBYTE *image)
 function: Select Image
 parameter:
     image : Pointer to the image cache
-****************************************************************************** /
+******************************************************************************/
 void Paint_SetSizeMem(UWORD Width, UWORD Height)
 {   
     
@@ -162,6 +162,25 @@ void Paint_SetMirroring(UBYTE mirror)
         Debug("mirror should be MIRROR_NONE, MIRROR_HORIZONTAL, \
         MIRROR_VERTICAL or MIRROR_ORIGIN\r\n");
     }    
+}
+/******************************************************************************
+function: Set BitsPerPixel
+parameter:
+    Xpoint : At point X
+    Ypoint : At point Y
+    Color  : Painted colors
+******************************************************************************/
+void Paint_SetBitsPerPixel(UBYTE bpp)
+{
+    if(bpp == 8 || bpp == 4 || bpp == 2 || bpp == 1){
+            Paint.BitsPerPixel = bpp;
+            Paint.GrayScale = pow(2, Paint.BitsPerPixel);
+            Paint.WidthByte = (Paint.WidthMemory * bpp % 8 == 0)? (Paint.WidthMemory * bpp / 8 ) : (Paint.WidthMemory * bpp / 8 + 1);
+    }
+    else{
+        Debug("Set BitsPerPixel Input parameter error\r\n");
+        Debug("BitsPerPixel Only support: 1 2 4 8 \r\n");
+    }
 }
 
 /******************************************************************************
