@@ -472,8 +472,188 @@ UBYTE GUI_ReadBmp(const char *path, UWORD x, UWORD y)
 
 	Bitmap_format_Matrix(bmp_dst_buf,bmp_src_buf);
 	
+	DrawMatrix(x, y,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
+	//DrawMatrix2(x, y,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
+
+    free(bmp_src_buf);
+    free(bmp_dst_buf);
+
+	bmp_src_buf = NULL;
+	bmp_dst_buf = NULL;
+
+	fclose(fp);
+	return(0);
+}
+
+
+
+UBYTE GUI_ReadBmp2(const char *path, UWORD x, UWORD y, UWORD w, UWORD h)
+{
+	//bmp file pointer
+	FILE *fp;
+	BMPFILEHEADER FileHead;
+	BMPINFOHEADER InfoHead;
+	UDOUBLE total_length;
+	UBYTE *buf = NULL;
+	UDOUBLE ret = -1;
+	
+	fp = fopen(path,"rb");
+	if (fp == NULL)
+	{
+		return(-1);
+	}
+ 
+	ret = fread(&FileHead, sizeof(BMPFILEHEADER),1, fp);
+	if (ret != 1)
+	{
+		Debug("Read header error!\n");
+		fclose(fp);
+		return(-2);
+	}
+
+	//Detect if it is a bmp image, since BMP file type is "BM"(0x4D42)
+	if (FileHead.bType != 0x4D42)
+	{
+		Debug("It's not a BMP file\n");
+		fclose(fp);
+		return(-3);
+	}
+	
+	Debug("*****************************************\n");
+	Debug("BMP_bSize:%d \n", FileHead.bSize);
+ 	Debug("BMP_bOffset:%d \n", FileHead.bOffset);
+	
+	ret = fread((char *)&InfoHead, sizeof(BMPINFOHEADER),1, fp);
+	if (ret != 1)
+	{
+		Debug("Read infoheader error!\n");
+		fclose(fp);
+		return(-4);
+	}
+	
+	Debug("BMP_biInfoSize:%d \n", InfoHead.biInfoSize);
+ 	Debug("BMP_biWidth:%d \n", InfoHead.biWidth);
+	Debug("BMP_biHeight:%d \n", InfoHead.biHeight);
+	Debug("BMP_biPlanes:%d \n", InfoHead.biPlanes);
+	Debug("BMP_biBitCount:%d \n", InfoHead.biBitCount);
+	Debug("BMP_biCompression:%d \n", InfoHead.biCompression);
+	Debug("BMP_bimpImageSize:%d \n", InfoHead.bimpImageSize);
+	Debug("BMP_biXPelsPerMeter:%d \n", InfoHead.biXPelsPerMeter);
+	Debug("BMP_biYPelsPerMeter:%d \n", InfoHead.biYPelsPerMeter);
+	Debug("BMP_biClrUsed:%d \n", InfoHead.biClrUsed);
+	Debug("BMP_biClrImportant:%d \n", InfoHead.biClrImportant);
+	
+	total_length = FileHead.bSize-FileHead.bOffset;
+	bytesPerLine=((InfoHead.biWidth*InfoHead.biBitCount+31)>>5)<<2;
+	imageSize=bytesPerLine*InfoHead.biHeight;
+	skip=(4-((InfoHead.biWidth*InfoHead.biBitCount)>>3))&3;
+	
+	Debug("bimpImageSize:%d\n", InfoHead.bimpImageSize);
+	Debug("total_length:%d\n", total_length);
+	Debug("bytesPerLine = %d\n", bytesPerLine);
+	Debug("imageSize = %d\n", imageSize);
+	Debug("skip = %d\n", skip);
+	Debug("*****************************************\n");
+	
+    bmp_width = InfoHead.biWidth;
+    bmp_height = InfoHead.biHeight;
+	bmp_BitCount = InfoHead.biBitCount;
+	
+	//This is old code, but allocate imageSize byte memory is more reasonable
+    bmp_src_buf = (UBYTE*)calloc(1,total_length);
+	//bmp_src_buf = (UBYTE*)calloc(1,imageSize);
+    if(bmp_src_buf == NULL){
+        Debug("Load > malloc bmp out of memory!\n");
+        return -1;
+    }
+	//This is old code, but allocate imageSize byte memory is more reasonable
+	bmp_dst_buf = (UBYTE*)calloc(1,total_length);
+	//bmp_dst_buf = (UBYTE*)calloc(1,imageSize);
+    if(bmp_dst_buf == NULL){
+        Debug("Load > malloc bmp out of memory!\n");
+        return -2;
+    }
+
+	 //Jump to data area
+    fseek(fp, FileHead.bOffset, SEEK_SET);
+	
+	//Bytes per line
+    buf = bmp_src_buf;
+    while ((ret = fread(buf,1,total_length,fp)) >= 0) 
+	{
+        if (ret == 0) 
+		{
+            DEV_Delay_us(100);
+            continue;
+        }
+		buf = ((UBYTE*)buf) + ret;
+        total_length = total_length - ret;
+        if(total_length == 0)
+            break;
+    }
+	
+	//Jump to color pattern board
+	switch(bmp_BitCount)
+	{	
+		case 1:
+			fseek(fp, 54, SEEK_SET);
+			ret = fread(palette,1,4*2,fp);
+			if (ret != 8) 
+			{
+				Debug("Error: fread != 8\n");
+				return -5;
+			}
+
+			//this is old code, will likely result in memory leak if use 1bp source bmp image
+			 
+			bmp_dst_buf = (UBYTE*)calloc(1,InfoHead.biWidth * InfoHead.biHeight);
+			if(bmp_dst_buf == NULL)
+			{
+				Debug("Load > malloc bmp out of memory!\n");
+				return -5;
+			}
+			
+		break;
+		
+		case 4:
+			fseek(fp, 54, SEEK_SET);
+			ret = fread(palette,1,4*16,fp);
+			if (ret != 64) 
+			{
+				Debug("Error: fread != 64\n");
+				return -5;
+			}
+			//this is old code, will likely result in memory leak if use 4bp source bmp image
+			
+			bmp_dst_buf = (UBYTE*)calloc(1,InfoHead.biWidth * InfoHead.biHeight);
+			if(bmp_dst_buf == NULL)
+			{
+				Debug("Load > malloc bmp out of memory!\n");
+				return -5;
+			}
+			
+		break;
+		
+		case 8:
+			fseek(fp, 54, SEEK_SET);
+
+			ret = fread(palette,1,4*256,fp);
+
+			if (ret != 1024) 
+			{
+				Debug("Error: fread != 1024\n");
+				return -5;
+			}
+		break;
+		
+		default:
+		break;
+	}
+
+	Bitmap_format_Matrix(bmp_dst_buf,bmp_src_buf);
+	
 	//DrawMatrix(x, y,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
-	DrawMatrix2(x, y,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
+	DrawMatrix2(x, y,w,h,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
 
     free(bmp_src_buf);
     free(bmp_dst_buf);
