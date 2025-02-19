@@ -208,10 +208,10 @@ static void DrawMatrix2(UWORD Xstart, UWORD Ystart, UWORD w, UWORD h ,UWORD Widt
 	UWORD xid,yid;
 	for (yid=0,j=Ypos;yid<(h);yid++,j++)
 	{
- 		y=yid+Ystart;
+ 		y=yid+(High-Ystart);
 		for (xid=0,i=Xpos;xid<(w);xid++,i++)
 		{
-			x=xid+Xstart;
+			x=xid+(Width-Xstart);
 			switch(bmp_BitCount)
 			{
 				case 1:
