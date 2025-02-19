@@ -74,7 +74,8 @@ app.get('/', (req, res) => {
       "position":[41.7325, -49.9469],
       "source": "Fix",
       "type" : "Wreck",
-      "MMSI": 912320328
+      "MMSI": 912320328,
+      "timeStamp": new Date('1912-04-15T02:20:00Z')
     }
     ],
   }  
