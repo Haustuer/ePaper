@@ -302,7 +302,7 @@ int main(int argc, char *argv[])
             mercator_projection(lat, lon,  &x, &y);     
             snprintf(buffer, 40, "Canvas coordinates: (%d, %d)\n", lat, lon);
 
-            Display_Text_Short(Init_Target_Memory_Addr,buffer,x,y,0,0);
+           // Display_Text_Short(Init_Target_Memory_Addr,buffer,x,y,0,0);
         }
 
     }
