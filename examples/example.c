@@ -447,10 +447,10 @@ UBYTE Display_BMP_Short3( UDOUBLE Init_Target_Memory_Addr ,int x, int y, int w, 
     char Path[30];
     sprintf(Path, "./pic/%dx%d_2.bmp", 1872, 1404);
 
-    GUI_ReadBmp2(Path, 0, 0,200,200);   
+    GUI_ReadBmp2(Path, 0, 0,800,800);   
 
 
-    EPD_IT8951_8bp_Refresh(Refresh_Frame_Buf, 0, 0, 200, 200, false, Init_Target_Memory_Addr);
+    EPD_IT8951_8bp_Refresh(Refresh_Frame_Buf, 0, 0, 800, 800, false, Init_Target_Memory_Addr);
 
     if (Refresh_Frame_Buf != NULL)
     {
