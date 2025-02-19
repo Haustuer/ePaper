@@ -221,7 +221,9 @@ void Paint_SetPixel(UWORD Xpoint, UWORD Ypoint, UWORD Color)
 
     if(X > Paint.WidthMemory || Y > Paint.HeightMemory){
         Debug("Exceeding display boundaries\r\n");
-        return;
+        X%=Paint.WidthMemory;
+        Y%=Paint.HeightMemory;
+        //  return;             // test
     }
 
     UDOUBLE Addr = X * (Paint.BitsPerPixel) / 8 + Y * Paint.WidthByte;
