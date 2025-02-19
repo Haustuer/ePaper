@@ -472,7 +472,7 @@ UBYTE GUI_ReadBmp(const char *path, UWORD x, UWORD y)
 
 	Bitmap_format_Matrix(bmp_dst_buf,bmp_src_buf);
 	
-	DrawMatrix(x, y,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
+	//DrawMatrix(x, y,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
 	DrawMatrix2(x, y,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
 
     free(bmp_src_buf);
