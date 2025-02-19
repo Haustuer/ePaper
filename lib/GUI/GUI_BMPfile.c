@@ -208,7 +208,7 @@ static void DrawMatrix2(UWORD Xstart, UWORD Ystart, UWORD w, UWORD h ,UWORD Widt
 	UWORD xid,yid;
 	for (yid=0,j=Ypos;yid<(High);yid++,j++)
 	{
- 		y=(Ystart+yid+2)%High;
+ 		y=(Ystart+yid+1)%High;
 
 		
 		for (xid=0,i=Xpos;xid<(Width);xid++,i++)
