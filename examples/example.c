@@ -58,7 +58,7 @@ parameter:
     Panel_Width: Width of the panel
     Panel_Height: Height of the panel
     Init_Target_Memory_Addr: Memory address of IT8951 target memory address
-******************************************************************************/
+****************************************************************************** /
 UBYTE Display_ColorPalette_Example(UWORD Panel_Width, UWORD Panel_Height, UDOUBLE Init_Target_Memory_Addr)
 {
     UWORD In_4bp_Refresh_Area_Width;
@@ -115,7 +115,7 @@ parameter:
     Panel_Height: Height of the panel
     Init_Target_Memory_Addr: Memory address of IT8951 target memory address
     BitsPerPixel: Bits Per Pixel, 2^BitsPerPixel = grayscale
-******************************************************************************/
+****************************************************************************** /
 UBYTE Display_CharacterPattern_Example(UWORD Panel_Width, UWORD Panel_Height, UDOUBLE Init_Target_Memory_Addr, UBYTE BitsPerPixel)
 {
     UWORD Display_Area_Width;
@@ -407,7 +407,7 @@ parameter:
     Panel_Height: Height of the panel
     Init_Target_Memory_Addr: Memory address of IT8951 target memory address
     BitsPerPixel: Bits Per Pixel, 2^BitsPerPixel = grayscale
-******************************************************************************/
+****************************************************************************** /
 UBYTE Display_Text_Short( UDOUBLE Init_Target_Memory_Addr ,  char *buffer,int x, int y, int w, int h)
 {
     UWORD WIDTH;
@@ -468,7 +468,7 @@ parameter:
     BitsPerPixel: Bits Per Pixel, 2^BitsPerPixel = grayscale
 ******************************************************************************/
 
-
+/*
 UBYTE Display_BMP_HST1(UWORD Panel_Width, UWORD Panel_Height, UDOUBLE Init_Target_Memory_Addr, UBYTE BitsPerPixel, int x, int y)
 {
     UWORD WIDTH;
@@ -544,7 +544,7 @@ UBYTE Display_BMP_HST1(UWORD Panel_Width, UWORD Panel_Height, UDOUBLE Init_Targe
 
     return 0;
 }
-
+ */
 /******************************************************************************
 function: Display_BMP_HST
 parameter:
@@ -743,7 +743,7 @@ parameter:
     Panel_Height: Height of the panel
     Init_Target_Memory_Addr: Memory address of IT8951 target memory address
     BitsPerPixel: Bits Per Pixel, 2^BitsPerPixel = grayscale
-******************************************************************************/
+****************************************************************************** /
 UBYTE Dynamic_GIF_Example(UWORD Panel_Width, UWORD Panel_Height, UDOUBLE Init_Target_Memory_Addr)
 {
 
@@ -857,7 +857,7 @@ parameter:
     Panel_Height: Height of the panel
     Init_Target_Memory_Addr: Memory address of IT8951 target memory address
     BitsPerPixel: Bits Per Pixel, 2^BitsPerPixel = grayscale
-******************************************************************************/
+****************************************************************************** /
 UBYTE Check_FrameRate_Example(UWORD Panel_Width, UWORD Panel_Height, UDOUBLE Target_Memory_Addr, UBYTE BitsPerPixel)
 {
     UWORD Frame_Rate_Test_Width;
@@ -970,7 +970,7 @@ parameter:
     Panel_Width: Width of the panel
     Panel_Height: Height of the panel
     Init_Target_Memory_Addr: Memory address of IT8951 target memory address
-******************************************************************************/
+****************************************************************************** /
 UBYTE TouchPanel_ePaper_Example(UWORD Panel_Width, UWORD Panel_Height, UDOUBLE Init_Target_Memory_Addr)
 {
     int ret, fd;
