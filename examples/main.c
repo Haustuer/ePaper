@@ -273,10 +273,10 @@ int main(int argc, char *argv[])
         break;
         case 4:
 
-        x = 00;
+        x = 100;
         
-        y = 00;
-        Display_BMP_Patch(Init_Target_Memory_Addr, x, y, 600, 600);
+        y = 200;
+        Display_BMP_Patch(Init_Target_Memory_Addr, x, y, 600, 800);
         break;
 
     case 7:
