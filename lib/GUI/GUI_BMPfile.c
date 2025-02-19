@@ -205,10 +205,10 @@ static void DrawMatrix2(UWORD Xstart, UWORD Ystart, UWORD w, UWORD h ,UWORD Widt
 	double Gray;
 	//Paint_SetSizeMem(w,h);
 	Paint_SetTargetWidth(w);
-	
-	for (y=Ystart,j=Ypos;y<(h+Ystart);y++,j++)
+	UWORD xid,yid;
+	for (yid=0,j=Ypos;yid<(h);yid++,j++)
 	{
- 		for (x=Xstart,i=Xpos;x<(w*Xstart);x++,i++)
+ 		for (xid=0,i=Xpos;xid<(w);xid++,i++)
 		{
 			switch(bmp_BitCount)
 			{
