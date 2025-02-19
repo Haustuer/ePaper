@@ -271,6 +271,14 @@ int main(int argc, char *argv[])
         Debug("end of Socket");
 
         break;
+        case 4:
+
+        x = 300;
+        
+        y = 300;
+        Display_BMP_Short3(Init_Target_Memory_Addr, x, y, 200, 200);
+        break;
+
     case 7:
 
         x = 300;
