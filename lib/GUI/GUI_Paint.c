@@ -118,7 +118,7 @@ void Paint_SelectImage(UBYTE *image)
 function: Select Image
 parameter:
     image : Pointer to the image cache
-******************************************************************************/
+****************************************************************************** /
 void Paint_SetSizeMem(UWORD Width, UWORD Height)
 {   
     
