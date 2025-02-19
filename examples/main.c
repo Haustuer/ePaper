@@ -300,7 +300,7 @@ int main(int argc, char *argv[])
 
         x = 200;        
         y = 300;
-        Display_BMP_Patch(Init_Target_Memory_Addr, x, y, 114, 138);
+        Display_BMP_Patch(Init_Target_Memory_Addr, 0, 0, 1872, 1404);
         break;
         /*
          UWORD Panel_Width =  114;//1872;
