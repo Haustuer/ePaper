@@ -115,6 +115,17 @@ void Paint_SelectImage(UBYTE *image)
 }
 
 /******************************************************************************
+function: Select Image
+parameter:
+    image : Pointer to the image cache
+******************************************************************************/
+void Paint_SetSizeMem(UWORD Width, UWORD Height)
+{   
+    Paint.WidthMemory = Width;
+    Paint.HeightMemory = Height;
+}
+
+/******************************************************************************
 function: Select Image Rotate
 parameter:
     Rotate : 0,90,180,270
