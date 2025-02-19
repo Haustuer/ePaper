@@ -422,4 +422,3 @@ UBYTE GUI_ReadBmp(const char *path, UWORD x, UWORD y)
 
 	fclose(fp);
 	return(0);
-}
