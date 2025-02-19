@@ -280,10 +280,13 @@ int main(int argc, char *argv[])
         break;
 
         case 5:
-        x = 400;
-        
-        y = 700;
-        Display_BMP_Patch(Init_Target_Memory_Addr, x, y, 630, 400);
+       int y = 0;
+        for (int x = 0; x < 800; x += 200) {
+            y+=100;
+        Display_BMP_Patch(Init_Target_Memory_Addr, x, y , 200, 100);         
+
+        }
+
         break;
         case 6:
         x = 0;
