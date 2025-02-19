@@ -1329,3 +1329,4 @@ void Color_Test(IT8951_Dev_Info Dev_Info, UDOUBLE Init_Target_Memory_Addr)
         break;
     }
 }
+*/
