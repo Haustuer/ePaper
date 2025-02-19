@@ -194,6 +194,61 @@ static void Bitmap_format_Matrix(UBYTE *dst,UBYTE *src)
 	}	
 }
 
+
+static void DrawMatrix2(UWORD Xpos, UWORD Ypos,UWORD Xstart, UWORD Ystart, UWORD Width, UWORD High,const UBYTE* Matrix)
+{
+	UWORD i,j,x,y;
+	UBYTE R,G,B;
+	UBYTE temp1,temp2;
+	double Gray;
+	
+	for (y=Ystart,j=Ypos;y<High;y++,j++)
+	{
+ 		for (x=Xstart,i=Xpos;x<Width;x++,i++)
+		{
+			switch(bmp_BitCount)
+			{
+				case 1:
+				case 4:
+				case 8:
+					R = palette[Matrix[(y*Width+x)]].rgbRed;
+					G = palette[Matrix[(y*Width+x)]].rgbGreen;
+					B = palette[Matrix[(y*Width+x)]].rgbBlue;
+				break;
+				
+				case 16:
+					temp1 = Matrix[(y*Width+x)*2];
+					temp2 = Matrix[(y*Width+x)*2+1];
+					R = (temp1 & 0x7c)<<1;
+					G = (((temp1 & 0x03) << 3 ) | ((temp2&0xe0) >> 5))<<3;
+					B = (temp2 & 0x1f)<<3;
+				break;
+				
+				case 24:
+					R = Matrix[(y*Width+x)*3];
+					G = Matrix[(y*Width+x)*3+1];
+					B = Matrix[(y*Width+x)*3+2];
+				break;
+				
+				case 32:
+					R = Matrix[(y*Width+x)*4];
+					G = Matrix[(y*Width+x)*4+1];
+					B = Matrix[(y*Width+x)*4+2];
+				break;
+				
+				default:
+				break;
+			}
+		
+			Gray = (R*299 + G*587 + B*114 + 500) / 1000;
+            if(isColor && i%3==2)
+				Paint_SetPixel(i, j, Gray/2);
+			else
+				Paint_SetPixel(i, j, Gray);
+		}
+	}
+}
+
 static void DrawMatrix(UWORD Xpos, UWORD Ypos,UWORD Width, UWORD High,const UBYTE* Matrix)
 {
 	UWORD i,j,x,y;
@@ -424,58 +479,4 @@ UBYTE GUI_ReadBmp(const char *path, UWORD x, UWORD y)
 
 	fclose(fp);
 	return(0);
-}
-
-static void DrawMatrix2(UWORD Xpos, UWORD Ypos,UWORD Xstart, UWORD Ystart, UWORD Width, UWORD High,const UBYTE* Matrix)
-{
-	UWORD i,j,x,y;
-	UBYTE R,G,B;
-	UBYTE temp1,temp2;
-	double Gray;
-	
-	for (y=Ystart,j=Ypos;y<High;y++,j++)
-	{
- 		for (x=Xstart,i=Xpos;x<Width;x++,i++)
-		{
-			switch(bmp_BitCount)
-			{
-				case 1:
-				case 4:
-				case 8:
-					R = palette[Matrix[(y*Width+x)]].rgbRed;
-					G = palette[Matrix[(y*Width+x)]].rgbGreen;
-					B = palette[Matrix[(y*Width+x)]].rgbBlue;
-				break;
-				
-				case 16:
-					temp1 = Matrix[(y*Width+x)*2];
-					temp2 = Matrix[(y*Width+x)*2+1];
-					R = (temp1 & 0x7c)<<1;
-					G = (((temp1 & 0x03) << 3 ) | ((temp2&0xe0) >> 5))<<3;
-					B = (temp2 & 0x1f)<<3;
-				break;
-				
-				case 24:
-					R = Matrix[(y*Width+x)*3];
-					G = Matrix[(y*Width+x)*3+1];
-					B = Matrix[(y*Width+x)*3+2];
-				break;
-				
-				case 32:
-					R = Matrix[(y*Width+x)*4];
-					G = Matrix[(y*Width+x)*4+1];
-					B = Matrix[(y*Width+x)*4+2];
-				break;
-				
-				default:
-				break;
-			}
-		
-			Gray = (R*299 + G*587 + B*114 + 500) / 1000;
-            if(isColor && i%3==2)
-				Paint_SetPixel(i, j, Gray/2);
-			else
-				Paint_SetPixel(i, j, Gray);
-		}
-	}
 }
