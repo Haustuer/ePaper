@@ -214,8 +214,8 @@ static void DrawMatrix2(UWORD Xstart, UWORD Ystart, UWORD w, UWORD h ,UWORD Widt
 		for (xid=0,i=Xpos;xid<(Width);xid++,i++)
 		{
 			//x=(xid+Width-w-+1)%Width;	
-
-			x=(Width-Xstart-w+xid)%Width;	
+		//	x=(Width-Xstart-w+xid)%Width;	
+			x=(Width-Xstart+xid)%Width;	
 			switch(bmp_BitCount)
 			{
 				case 1:
