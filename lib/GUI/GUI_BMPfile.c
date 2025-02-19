@@ -413,8 +413,8 @@ UBYTE GUI_ReadBmp(const char *path, UWORD x, UWORD y)
 
 	Bitmap_format_Matrix(bmp_dst_buf,bmp_src_buf);
 	
-	DrawMatrix(x, y,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
-	//DrawMatrix2(x, y,0,0,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
+	//DrawMatrix(x, y,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
+	DrawMatrix2(x, y,0,0,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
 
     free(bmp_src_buf);
     free(bmp_dst_buf);
@@ -433,9 +433,9 @@ static void DrawMatrix2(UWORD Xpos, UWORD Ypos,UWORD Xstart, UWORD Ystart, UWORD
 	UBYTE temp1,temp2;
 	double Gray;
 	
-	for (y=0,j=Ypos;y<High;y++,j++)
+	for (y=Ystart,j=Ypos;y<High;y++,j++)
 	{
- 		for (x=0,i=Xpos;x<Width;x++,i++)
+ 		for (x=Xstart,i=Xpos;x<Width;x++,i++)
 		{
 			switch(bmp_BitCount)
 			{
