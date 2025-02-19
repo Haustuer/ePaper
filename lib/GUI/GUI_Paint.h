@@ -195,6 +195,7 @@ void Paint_NewImage(UBYTE *image, UWORD Width, UWORD Height, UWORD Rotate, UWORD
 void Paint_SelectImage(UBYTE *image);
 void Paint_SetRotate(UWORD Rotate);
 void Paint_SetMirroring(UBYTE mirror);
+void Paint_SetTargetWidth(UWORD w);
 void Paint_SetBitsPerPixel(UBYTE bpp);
 void Paint_SetPixel(UWORD Xpoint, UWORD Ypoint, UWORD Color);
 
