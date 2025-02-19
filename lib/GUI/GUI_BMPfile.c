@@ -197,8 +197,8 @@ static void Bitmap_format_Matrix(UBYTE *dst,UBYTE *src)
 
 static void DrawMatrix2(UWORD Xstart, UWORD Ystart, UWORD w, UWORD h ,UWORD Width, UWORD High,const UBYTE* Matrix)
 {
-	UWORD Xpos=Xstart;
-	UWORD Ypos=Ystart;
+	UWORD Xpos=0;
+	UWORD Ypos=0;
 	UWORD i,j,x,y;
 	UBYTE R,G,B;
 	UBYTE temp1,temp2;
@@ -206,9 +206,9 @@ static void DrawMatrix2(UWORD Xstart, UWORD Ystart, UWORD w, UWORD h ,UWORD Widt
 	//Paint_SetSizeMem(w,h);
 	Paint_SetTargetWidth(w);
 	
-	for (y=0,j=Ypos;y<High;y++,j++)
+	for (y=Ystart,j=Ypos;y<High;y++,j++)
 	{
- 		for (x=0,i=Xpos;x<Width;x++,i++)
+ 		for (x=Xstart,i=Xpos;x<Width;x++,i++)
 		{
 			switch(bmp_BitCount)
 			{
