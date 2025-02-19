@@ -289,7 +289,8 @@ parameter:
     Panel_Height: Height of the panel
     Init_Target_Memory_Addr: Memory address of IT8951 target memory address
     BitsPerPixel: Bits Per Pixel, 2^BitsPerPixel = grayscale
-******************************************************************************/
+******************************************************************************
+/
 UBYTE Display_BMP_Patch( UDOUBLE Init_Target_Memory_Addr ,int x, int y, int w, int h)
 {
     UWORD WIDTH;
@@ -411,7 +412,7 @@ parameter:
     Init_Target_Memory_Addr: Memory address of IT8951 target memory address
     BitsPerPixel: Bits Per Pixel, 2^BitsPerPixel = grayscale
 ******************************************************************************/
-UBYTE Display_BMP_Short3( UDOUBLE Init_Target_Memory_Addr ,int x, int y, int w, int h)
+UBYTE Display_BMP_Patch( UDOUBLE Init_Target_Memory_Addr ,int x, int y, int w, int h)
 {
     UWORD WIDTH;
 
@@ -447,12 +448,9 @@ UBYTE Display_BMP_Short3( UDOUBLE Init_Target_Memory_Addr ,int x, int y, int w, 
     char Path[30];
     sprintf(Path, "./pic/%dx%d_22.bmp", 1872, 1404);
 
-    GUI_ReadBmp2(Path, 0, 0,800,800);   
+    GUI_ReadBmp2(Path, 0, 0,w,h);   
 
-
-    
-
-    EPD_IT8951_8bp_Refresh(Refresh_Frame_Buf, 0, 0, 800, 800, false, Init_Target_Memory_Addr);
+    EPD_IT8951_8bp_Refresh(Refresh_Frame_Buf, x, x, w, h, false, Init_Target_Memory_Addr);
 
     if (Refresh_Frame_Buf != NULL)
     {
