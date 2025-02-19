@@ -324,7 +324,7 @@ UBYTE Display_BMP_Patch( UDOUBLE Init_Target_Memory_Addr ,int x, int y, int w, i
     // Paint_Clear(WHITE);
 
     char Path[30];
-    sprintf(Path, "./pic/%dx%d_2.bmp", WIDTH, HEIGHT);
+    sprintf(Path, "./pic/%dx%d_2.bmp", 1872, 1404);
 
 
     GUI_ReadBmp(Path, x, y);   

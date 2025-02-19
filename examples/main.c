@@ -276,8 +276,11 @@ int main(int argc, char *argv[])
         x = 300;
         ;
         y = 300;
-        Display_BMP_Patch(Init_Target_Memory_Addr, x, y, 20, 30);
+        Display_BMP_Patch(Init_Target_Memory_Addr, x, y, 110, 134);
         break;
+        /*
+         UWORD Panel_Width =  114;//1872;
+    UWORD Panel_Height = 138;// 1404;*/
 
     case 8:
 
