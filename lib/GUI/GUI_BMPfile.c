@@ -206,12 +206,12 @@ static void DrawMatrix2(UWORD Xstart, UWORD Ystart, UWORD w, UWORD h ,UWORD Widt
 	//Paint_SetSizeMem(w,h);
 	Paint_SetTargetWidth(w);
 	UWORD xid,yid;
-	for (yid=0,j=Ypos;yid<(h);yid++,j++)
+	for (yid=0,j=Ypos;yid<(High);yid++,j++)
 	{
  		y=(Ystart+yid+2);
 
 		
-		for (xid=0,i=Xpos;xid<(w);xid++,i++)
+		for (xid=0,i=Xpos;xid<(Width);xid++,i++)
 		{
 			//x=(xid+Width-w-+1)%Width;	
 
