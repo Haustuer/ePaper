@@ -636,7 +636,7 @@ UBYTE Display_BMP_Short2( UDOUBLE Init_Target_Memory_Addr ,int x, int y,int icon
     return 0;
 }
 
-/******************************************************************************
+
 /******************************************************************************
 function: Dynamic_Refresh_Example
 parameter:
