@@ -283,8 +283,8 @@ int main(int argc, char *argv[])
             int y = 0;
         for (int x = 0; x < 1600; x += 200) {
            
-        Display_BMP_Patch(Init_Target_Memory_Addr, x, y , 400, 200); 
-        y+=200;        
+        Display_BMP_Patch(Init_Target_Memory_Addr, x, y , 600, 300); 
+        y+=300;        
 
         }
 
