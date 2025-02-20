@@ -281,7 +281,7 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Icon ,UWORD Width, UWORD High
 		/* code */
 		iconWidth=Ship1W;
 		iconHeight=Ship1H;		
-        iconData = unsigned int *)malloc(Ship1W*Ship1H * sizeof(unsigned int));
+        iconData = (unsigned int *)malloc(Ship1W*Ship1H * sizeof(unsigned int));
         memcpy(iconData, Ship1Data, Ship1W*Ship1H * sizeof(unsigned int));
         break;
 
