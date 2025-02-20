@@ -951,13 +951,18 @@ UBYTE GUI_ReadBmp3(const char *path, UWORD x, UWORD y, UWORD Icon)
 	}
 
 	Bitmap_format_Matrix(bmp_dst_buf,bmp_src_buf);
-	
+	PicSize mysize;
 	int w=10;
 	int h=20;
 	Debug("befor w:%d h:%d\n",w,h);
+
+
 	//DrawMatrix(x, y,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
-	DrawMatrix3(x, y,w,h,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
+	mysize=DrawMatrix3(x, y,w,h,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
 	Debug("After w:%d h:%d\n",w,h);
+	w=mysize.w;
+	h=mysize.h;
+	Debug("more After w:%d h:%d\n",w,h);
     free(bmp_src_buf);
     free(bmp_dst_buf);
 
