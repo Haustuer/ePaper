@@ -275,6 +275,7 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Icon ,UWORD Width, UWORD High
 	int iconHeight;
 	unsigned int *iconData;
 
+	Debug(" Draw Icon:%d\n",Icon);	
 	switch (Icon)
 	{
 	case 1:
