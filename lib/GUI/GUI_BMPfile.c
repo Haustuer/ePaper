@@ -269,11 +269,9 @@ static void DrawMatrix2(UWORD Xstart, UWORD Ystart, UWORD w, UWORD h ,UWORD Widt
 
 
 
-PicSize DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Width, UWORD High,const UBYTE* Matrix)
+int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Width, UWORD High,const UBYTE* Matrix)
 {
-	PicSize size;
-	size.w=62;
-	size.h=59;
+	
 	int imWidth=62;
 	int imHeight=59;
 	
@@ -367,7 +365,7 @@ PicSize DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Width, UWORD High,const UB
 				Paint_SetPixel(i, j, Gray);
 		}
 	}
-	return size;
+	return [imWidth,imHeight];
 }
 
 
@@ -951,7 +949,7 @@ UBYTE GUI_ReadBmp3(const char *path, UWORD x, UWORD y, UWORD Icon)
 	}
 
 	Bitmap_format_Matrix(bmp_dst_buf,bmp_src_buf);
-	PicSize mysize;
+	int mysize[2];
 	int w=10;
 	int h=20;
 	Debug("befor w:%d h:%d\n",w,h);
@@ -960,8 +958,8 @@ UBYTE GUI_ReadBmp3(const char *path, UWORD x, UWORD y, UWORD Icon)
 	//DrawMatrix(x, y,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
 	mysize=DrawMatrix3(x, y,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
 	Debug("After w:%d h:%d\n",w,h);
-	w=mysize.w;
-	h=mysize.h;
+	w=mysize[0];
+	h=mysize[1];
 	Debug("more After w:%d h:%d\n",w,h);
     free(bmp_src_buf);
     free(bmp_dst_buf);
@@ -970,5 +968,6 @@ UBYTE GUI_ReadBmp3(const char *path, UWORD x, UWORD y, UWORD Icon)
 	bmp_dst_buf = NULL;
 
 	fclose(fp);
+	
 	return(0);
 }
