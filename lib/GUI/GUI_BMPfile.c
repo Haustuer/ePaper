@@ -350,7 +350,7 @@ static void DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD *w, UWORD *h ,UWORD Wi
 
 				if (Ship1data[crazyy*imWidth+crazyx]!=16){
 					Gray = 0;
-					//Debug("index:%d   y:%d x:%d  w:%d  Pixel: %d\n",yid*w+xid,yid,xid,w, Ship1data[yid*w+xid]);
+					Debug("index:%d   y:%d x:%d  w:%d  Pixel: %d\n",yid*imWidth+xid,yid,xid,*w, Ship1data[yid*imWidth+xid]);
 					
 				}
 			
