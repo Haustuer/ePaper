@@ -365,7 +365,11 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Width, UWORD High,const UBYTE
 				Paint_SetPixel(i, j, Gray);
 		}
 	}
-	int mysize={imWidth,imHeight};
+	{
+	int* mysize = (int*)malloc(2 * sizeof(int));
+	 mysize[0]=imWidth;
+	 mysize[1]=imHeight;	 
+	 
 	return mysize;
 }
 
@@ -966,7 +970,7 @@ UBYTE GUI_ReadBmp3(const char *path, UWORD x, UWORD y, UWORD Icon)
 		exit(1);
 	}*/
 	w=mysize[0];
-	//h=mysize[1];
+	h=mysize[1];
 	Debug("more After w:%d h:%d\n",w,h);
     free(bmp_src_buf);
     free(bmp_dst_buf);
