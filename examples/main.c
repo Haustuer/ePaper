@@ -262,7 +262,7 @@ int main(int argc, char *argv[])
            
 
                 mercator_projection(lat, lng, &x, &y);     
-                Display_Icon(Init_Target_Memory_Addr,y,x,icon);
+                Display_Icon(Init_Target_Memory_Addr,x,y,icon);
 
                 //Display_BMP_Short2(Init_Target_Memory_Addr,x,y,icon);;
                 Display_BMP_Short2(Init_Target_Memory_Addr, x, y, icon);
