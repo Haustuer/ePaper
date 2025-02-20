@@ -60,6 +60,12 @@ UDOUBLE skip;
 BMPRGBQUAD  palette[256];
 extern UBYTE isColor;
 
+typedef struct {
+    int w;
+    int h;   
+} PicSize;
+
+
 static void Bitmap_format_Matrix(UBYTE *dst,UBYTE *src)
 {
 	UDOUBLE i,j,k;
@@ -263,13 +269,14 @@ static void DrawMatrix2(UWORD Xstart, UWORD Ystart, UWORD w, UWORD h ,UWORD Widt
 
 
 
-static void DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD *w, UWORD *h ,UWORD Width, UWORD High,const UBYTE* Matrix)
+ DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Width, UWORD High,const UBYTE* Matrix)
 {
-	
+	PicSize size;
+	size.w=62;
+	size.h=59;
 	int imWidth=62;
 	int imHeight=59;
-	*w=62;
-	*h=59;
+	
 	unsigned int Ship1data[3658] = {
 		16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 14, 14, 14, 14, 9, 10, 7, 5, 14, 14, 14, 16, 16, 16, 16, 16, 16, 
 		16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 14, 14, 13, 14, 14, 16, 16, 16, 16, 16, 16, 
@@ -360,6 +367,7 @@ static void DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD *w, UWORD *h ,UWORD Wi
 				Paint_SetPixel(i, j, Gray);
 		}
 	}
+	return size;
 }
 
 
