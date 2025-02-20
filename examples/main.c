@@ -294,7 +294,7 @@ int main(int argc, char *argv[])
         for (int x=0;x<1400;x+=200){
             for (int y=0;y<1200;y+=200){
                 Debug("x:%d y:%d \n",x,y);
-                Display_BMP_Patch(Init_Target_Memory_Addr, y ,x, 200, 200);
+                Display_BMP_Patch(Init_Target_Memory_Addr, y ,x, 159, 101);
 
         }}
       
