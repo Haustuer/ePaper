@@ -338,7 +338,7 @@ static void DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD w, UWORD h ,UWORD Widt
 				default:
 				break;
 			}
-			Debug("index:%d\n",yid*w+xid);
+			Debug("index:%d     y:%d x:%d  w:%d\n",yid*w+xid,yid,xid,w);
 			if (Ship1data[yid*w+xid]==16){
 			Gray = (R*299 + G*587 + B*114 + 500) / 1000;
 			}else{Gray = 0;}
