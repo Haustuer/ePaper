@@ -275,6 +275,8 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Icon ,UWORD Width, UWORD High
 	int iconHeight;
 	unsigned int *iconData;
 
+	int offset;
+	int offset2;
 	Debug(" Draw Icon:%d\n",Icon);	
 	switch (Icon)
 	{
@@ -284,6 +286,8 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Icon ,UWORD Width, UWORD High
 			iconHeight=Ship2H;		
 			iconData = (unsigned int *)malloc(Ship2W*Ship2H * sizeof(unsigned int));
 			memcpy(iconData, Ship2Data, Ship2W*Ship2H * sizeof(unsigned int));
+			offset=40;
+	offset2=0;
 			break;
 
 	case 1:
@@ -292,6 +296,8 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Icon ,UWORD Width, UWORD High
 		iconHeight=Ship1H;		
         iconData = (unsigned int *)malloc(Ship1W*Ship1H * sizeof(unsigned int));
         memcpy(iconData, Ship1Data, Ship1W*Ship1H * sizeof(unsigned int));
+		offset=0;
+	offset2=0;
         break;
 
 
@@ -300,6 +306,8 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Icon ,UWORD Width, UWORD High
 	default:
 	iconWidth=SchildiW;
 	iconHeight=SchildiH;
+	offset=40;
+	offset2=1;
 	iconData = (unsigned int *)malloc(SchildiW*SchildiH * sizeof(unsigned int));
         memcpy(iconData, SchildiData, SchildiW*SchildiH  * sizeof(unsigned int));
         break;
@@ -313,7 +321,7 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Icon ,UWORD Width, UWORD High
 	UBYTE temp1,temp2;
 	double Gray;
 	//Paint_SetSizeMem(w,h);
-	Paint_SetTargetWidth(iconWidth+1);
+	Paint_SetTargetWidth(iconWidth+offset2);
 	UWORD xid,yid;
 	for (yid=0,j=Ypos;yid<(High);yid++,j++)
 	{
@@ -360,7 +368,7 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Icon ,UWORD Width, UWORD High
 				break;
 			}
 			
-				const offset=40;
+				
 			Gray = (R*299 + G*587 + B*114 + 500) / 1000;
 				int crazyy=yid%iconHeight;					
 				int crazyx=offset+xid%iconWidth;		
