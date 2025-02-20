@@ -258,7 +258,7 @@ int main(int argc, char *argv[])
                 token = strtok(NULL, delimiter);
                 icon = atoi(token);
                 printf("icon: %d\n", icon);              
-              
+                Debug("icon: %d\n", icon);
            
 
                 mercator_projection(lat, lng, &x, &y);     
