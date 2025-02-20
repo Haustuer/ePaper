@@ -348,11 +348,11 @@ static void DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD *w, UWORD *h ,UWORD Wi
 				int crazyy=y%imWidth;					
 				int crazyx=x%imHeight;			
 
-				if (Ship1data[crazyy*imWidth+crazyx]!=16){
+		/*		if (Ship1data[crazyy*imWidth+crazyx]!=16){
 					Gray = 0;
 					Debug("index:%d   y:%d x:%d  w:%d  Pixel: %d\n",yid*imWidth+xid,yid,xid,*w, Ship1data[yid*imWidth+xid]);
 					
-				}
+				}*/
 			
             if(isColor && i%3==2)
 				Paint_SetPixel(i, j, Gray/2);
