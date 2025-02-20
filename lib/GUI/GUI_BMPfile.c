@@ -959,6 +959,10 @@ UBYTE GUI_ReadBmp3(const char *path, UWORD x, UWORD y, UWORD Icon)
 	//DrawMatrix(x, y,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
 	int* mysize=DrawMatrix3(x, y,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
 	Debug("After w:%d h:%d\n",w,h);
+	if (mysize == NULL) {
+		printf("Memory allocation failed\n");
+		exit(1);
+	}
 	w=mysize[0];
 	h=mysize[1];
 	Debug("more After w:%d h:%d\n",w,h);
