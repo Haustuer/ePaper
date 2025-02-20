@@ -263,9 +263,11 @@ static void DrawMatrix2(UWORD Xstart, UWORD Ystart, UWORD w, UWORD h ,UWORD Widt
 
 
 
-static void DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD w, UWORD h ,UWORD Width, UWORD High,const UBYTE* Matrix)
+static void DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD *w, UWORD *h ,UWORD Width, UWORD High,const UBYTE* Matrix)
 {
-	
+	*w=62;
+	*h=59;
+
 	unsigned int Ship1data[3658] = {
 		16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 14, 14, 14, 14, 9, 10, 7, 5, 14, 14, 14, 16, 16, 16, 16, 16, 16, 
 		16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 14, 14, 13, 14, 14, 16, 16, 16, 16, 16, 16, 
@@ -940,11 +942,12 @@ UBYTE GUI_ReadBmp3(const char *path, UWORD x, UWORD y, UWORD Icon)
 
 	Bitmap_format_Matrix(bmp_dst_buf,bmp_src_buf);
 	
-	int w=62;
-	int h=59;
+	int w=10;
+	int h=20;
+	Debug("befor w:%d h:%d\n",w,h);
 	//DrawMatrix(x, y,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
 	DrawMatrix3(x, y,w,h,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
-
+	Debug("After w:%d h:%d\n",w,h);
     free(bmp_src_buf);
     free(bmp_dst_buf);
 
