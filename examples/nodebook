@@ -1,0 +1,93 @@
+Got it! I'll update the code so that the `ID` argument is always the first in the function parameters. Here's the revised version:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+#include <algorithm> // For std::find_if
+
+struct Object {
+    int x;               // X coordinate
+    int y;               // Y coordinate
+    int ID;              // Unique identifier for the object
+    uint32_t iconIdentifier; // Identifier for the icon as an unsigned integer
+
+    // Constructor to initialize the object
+    Object(int id, int xCoord, int yCoord, uint32_t iconId)
+        : ID(id), x(xCoord), y(yCoord), iconIdentifier(iconId) {}
+};
+
+class ObjectManager {
+private:
+    std::vector<Object> objects;
+    std::unordered_map<int, size_t> idIndexMap; // Maps ID to index in the vector
+
+public:
+    // Add a new object
+    bool addObject(int id, int x, int y, uint32_t iconId) {
+        if (idIndexMap.find(id) != idIndexMap.end()) {
+            std::cerr << "Error: ID already exists.\n";
+            return false;
+        }
+        objects.emplace_back(id, x, y, iconId);
+        idIndexMap[id] = objects.size() - 1;
+        return true;
+    }
+
+    // Remove an object by ID
+    bool removeObject(int id) {
+        auto it = idIndexMap.find(id);
+        if (it == idIndexMap.end()) {
+            std::cerr << "Error: ID not found.\n";
+            return false;
+        }
+        size_t index = it->second;
+        objects.erase(objects.begin() + index);
+        idIndexMap.erase(it);
+
+        // Update indices in the map
+        for (size_t i = index; i < objects.size(); ++i) {
+            idIndexMap[objects[i].ID] = i;
+        }
+        return true;
+    }
+
+    // Update an object by ID
+    bool updateObject(int id, int newX, int newY, uint32_t newIconId) {
+        auto it = idIndexMap.find(id);
+        if (it == idIndexMap.end()) {
+            std::cerr << "Error: ID not found.\n";
+            return false;
+        }
+        size_t index = it->second;
+        objects[index].x = newX;
+        objects[index].y = newY;
+        objects[index].iconIdentifier = newIconId;
+        return true;
+    }
+
+    // Print all objects
+    void printObjects() const {
+        for (const auto& obj : objects) {
+            std::cout << "ID: " << obj.ID << ", x: " << obj.x << ", y: " << obj.y << ", icon: " << obj.iconIdentifier << '\n';
+        }
+    }
+};
+
+int main() {
+    ObjectManager manager;
+    manager.addObject(1, 10, 20, 1001);
+    manager.addObject(2, 30, 40, 1002);
+    manager.printObjects();
+
+    manager.updateObject(1, 15, 25, 1003);
+    manager.printObjects();
+
+    manager.removeObject(2);
+    manager.printObjects();
+
+    return 0;
+}
+```
+
+In this version, the `ID` argument is always the first parameter in the functions `addObject`, `removeObject`, and `updateObject`. If you need any further modifications or have additional questions, feel free to ask!
