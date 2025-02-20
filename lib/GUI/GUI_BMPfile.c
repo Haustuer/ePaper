@@ -341,8 +341,8 @@ static void DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD w, UWORD h ,UWORD Widt
 			
 
 			Gray = (R*299 + G*587 + B*114 + 500) / 1000;
-				int crazyy=yid%w;
-				int crazyx=xid%h;
+				int crazyy=y%w;
+				int crazyx=x%h;
 
 				if (Ship1data[crazyy*w+crazyx]!=16){
 					Gray = 0;
@@ -940,8 +940,8 @@ UBYTE GUI_ReadBmp3(const char *path, UWORD x, UWORD y, UWORD Icon)
 
 	Bitmap_format_Matrix(bmp_dst_buf,bmp_src_buf);
 	
-	int w=62;
-	int h=59;
+	int w=620;
+	int h=590;
 	//DrawMatrix(x, y,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
 	DrawMatrix3(x, y,w,h,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
 

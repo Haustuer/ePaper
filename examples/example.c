@@ -513,8 +513,8 @@ UBYTE Display_Icon( UDOUBLE Init_Target_Memory_Addr ,int x, int y,  int Icon)
     Icon=0;
 
     
-    int w = 62;//BigShip.width;
-    int h = 59;//BigShip.height;
+    int w = 620;//BigShip.width;
+    int h = 590;//BigShip.height;
 
 
     GUI_ReadBmp3(Path, x, y,Icon);   
