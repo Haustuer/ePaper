@@ -213,7 +213,7 @@ static void DrawMatrix2(UWORD Xstart, UWORD Ystart, UWORD w, UWORD h ,UWORD Widt
 	Debug("Draw X:%dY:%d to X*:%dY*:%d\n",Xstart,Ystart,Xstart+w,Ystart+h);
 
 	//Paint_SetSizeMem(w,h);
-	Paint_SetTargetWidth(w);
+	Paint_SetTargetWidth(w+1);
 	UWORD xid,yid;
 	for (yid=0,j=Ypos;yid<(High);yid++,j++)
 	{
