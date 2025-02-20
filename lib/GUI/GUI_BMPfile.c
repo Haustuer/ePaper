@@ -47,6 +47,7 @@
 #include <math.h>//memset()
 #include <stdio.h>
 
+#include "icons.h"
 
 //global variables related to BMP picture display
 UBYTE *bmp_dst_buf = NULL;
