@@ -95,7 +95,7 @@ MapIcon SmallShip = {100, 200, image_100x200};
 MapIcon SmallShip2 = {75, 50, image_75x50};
 
 */
- MapIcon icons[]={BigShip};
+ //MapIcon icons[]={BigShip};
 
 
  
