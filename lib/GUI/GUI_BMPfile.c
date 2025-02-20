@@ -971,12 +971,13 @@ int* GUI_ReadBmp3(const char *path, UWORD x, UWORD y, UWORD Icon)
 	}*/
 	w=mysize[0];
 	h=mysize[1];
-	Debug("more After w:%d h:%d\n",w,h);
+	
 
 
     free(bmp_src_buf);
     free(bmp_dst_buf);
-	//free(mysize);  // hmm
+	free(mysize);  // hmm
+	Debug("more After memory clean w:%d h:%d\n",w,h);
 	bmp_src_buf = NULL;
 	bmp_dst_buf = NULL;
 
