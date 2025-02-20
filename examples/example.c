@@ -514,7 +514,7 @@ UBYTE Display_Icon( UDOUBLE Init_Target_Memory_Addr ,int x, int y,  int Icon)
 
     
     int w = BigShip.width;
-    int h = BigShip.hight;
+    int h = BigShip.height;
 
 
     GUI_ReadBmp2(Path, x, y,w,h);   
