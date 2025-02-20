@@ -273,15 +273,17 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Icon ,UWORD Width, UWORD High
 {
 	int iconWidth;
 	int iconHeight;
-	unsigned int iconData[];
+	unsigned int *iconData;
 
 	switch (Icon)
 	{
 	case 1:
 		/* code */
 		iconWidth=Ship1W;
-		iconHeight=Ship1H;
-		iconData=Ship1Data;
+		iconHeight=Ship1H;		
+        iconData = unsigned int *)malloc(Ship1W*Ship1H * sizeof(unsigned int));
+        memcpy(iconData, Ship1Data, Ship1W*Ship1H * sizeof(unsigned int));
+        break;
 
 
 		break;
@@ -289,8 +291,9 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Icon ,UWORD Width, UWORD High
 	default:
 	iconWidth=SchildiW;
 	iconHeight=SchildiH;
-	iconData=SchildiData;
-		break;
+	iconData = (unsigned int *)malloc(SchildiW*SchildiH * sizeof(unsigned int));
+        memcpy(iconData, SchildiData, SchildiW*SchildiH  * sizeof(unsigned int));
+        break
 	}
 
 	
@@ -371,6 +374,7 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Icon ,UWORD Width, UWORD High
 	 mysize[0]=iconWidth;
 	 mysize[1]=iconHeight;	 
 	 
+	 free(iconData);
 	return mysize;
 }
 
