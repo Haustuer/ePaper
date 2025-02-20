@@ -533,6 +533,7 @@ UBYTE Display_Icon( UDOUBLE Init_Target_Memory_Addr ,int x, int y,  int Icon)
     //y=0;
     //w=1872;
     //h=1404;
+    Debug("ICON 3 x:%d y:%d w:%d h:%d\n",x,y,w,h);
     EPD_IT8951_8bp_Refresh(Refresh_Frame_Buf, x, y, w, h, false, Init_Target_Memory_Addr);
 
     if (Refresh_Frame_Buf != NULL)
@@ -772,7 +773,8 @@ UBYTE Display_BMP_Short2( UDOUBLE Init_Target_Memory_Addr ,int x, int y,int icon
    
     
 
-    GUI_ReadBmp(Path, 0, 0);   
+    GUI_ReadBmp(Path, 0, 0);  
+    Debug("Read 3 x:%d y:%d w:%d h:%d\n",x,y,WIDTH,HEIGHT); 
     EPD_IT8951_8bp_Refresh(Refresh_Frame_Buf, x, y, WIDTH, HEIGHT, false, Init_Target_Memory_Addr);
 
     if (Refresh_Frame_Buf != NULL)
