@@ -365,7 +365,7 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Width, UWORD High,const UBYTE
 				Paint_SetPixel(i, j, Gray);
 		}
 	}
-	{
+	
 	int* mysize = (int*)malloc(2 * sizeof(int));
 	 mysize[0]=imWidth;
 	 mysize[1]=imHeight;	 
