@@ -291,14 +291,25 @@ int main(int argc, char *argv[])
         break;
         case 6:     
         
-        for (int x=0;x<1400;x+=50){
-            for (int y=0;y<1200;y+=50){
+        for (int x=0;x<1400;x+=200){
+            for (int y=0;y<1200;y+=200){
                 Debug("x:%d y:%d \n",x,y);
-                Display_BMP_Patch(Init_Target_Memory_Addr, y ,x, 100, 100);
+                Display_BMP_Patch(Init_Target_Memory_Addr, y ,x, 200, 200);
 
         }}
       
         break;
+        case 61:     
+        
+        for (int x=0;x<1300;x+=200){
+            for (int y=0;y<1200;y+=200){
+                Debug("x:%d y:%d \n",x,y);
+                Display_Icon(Init_Target_Memory_Addr,y,x,0);
+
+        }}
+      
+        break;
+
 
     case 7:
 
