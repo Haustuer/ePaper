@@ -958,7 +958,7 @@ UBYTE GUI_ReadBmp3(const char *path, UWORD x, UWORD y, UWORD Icon)
 
 
 	//DrawMatrix(x, y,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
-	mysize=DrawMatrix3(x, y,w,h,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
+	mysize=DrawMatrix3(x, y,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
 	Debug("After w:%d h:%d\n",w,h);
 	w=mysize.w;
 	h=mysize.h;
