@@ -310,7 +310,7 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Width, UWORD High,const UBYTE
 	UBYTE temp1,temp2;
 	double Gray;
 	//Paint_SetSizeMem(w,h);
-	Paint_SetTargetWidth(imWidth2);
+	Paint_SetTargetWidth(imWidth2-1);
 	UWORD xid,yid;
 	for (yid=0,j=Ypos;yid<(High);yid++,j++)
 	{
