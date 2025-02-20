@@ -981,10 +981,11 @@ int* GUI_ReadBmp3(const char *path, UWORD x, UWORD y, UWORD Icon)
 	bmp_dst_buf = NULL;
 
 	fclose(fp);
-	
+	Debug("befor maloc");
 	int* picsize = (int*)malloc(2 * sizeof(int));
+	Debug("after maloc");
 	picsize[0]=w;
 	picsize[1]=h;	 
-	 
+	Debug("more after maloc");
 	return picsize;
 }
