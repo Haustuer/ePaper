@@ -338,8 +338,9 @@ static void DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD w, UWORD h ,UWORD Widt
 				default:
 				break;
 			}
-		
+			if (Ship1data[yid*w+xid]==16){
 			Gray = (R*299 + G*587 + B*114 + 500) / 1000;
+			}else{Gray = 0;}
             if(isColor && i%3==2)
 				Paint_SetPixel(i, j, Gray/2);
 			else
