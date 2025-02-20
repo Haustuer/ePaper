@@ -217,14 +217,14 @@ static void DrawMatrix2(UWORD Xstart, UWORD Ystart, UWORD w, UWORD h ,UWORD Widt
 	UWORD xid,yid;
 	for (yid=0,j=Ypos;yid<(High);yid++,j++)
 	{
- 		y=(Ystart+yid)%Width;;//%High;   // tinkerd
+ 		y=(Ystart+yid)%High;;//%High;   // tinkerd
 
 		  
 		for (xid=0,i=Xpos;xid<(Width);xid++,i++)
 		{
 			//x=(xid+Width-w-+1)%Width;	
 		//	x=(Width-Xstart-w+xid)%Width;	
-			x=(Width-Xstart+xid-1)%High;;//%Width;	  // tinkerd
+			x=(Width-Xstart+xid+6)%Width;	  // tinkerd
 			switch(bmp_BitCount)
 			{
 				case 1:
@@ -258,7 +258,7 @@ static void DrawMatrix2(UWORD Xstart, UWORD Ystart, UWORD w, UWORD h ,UWORD Widt
 				default:
 				break;
 			}
-		
+			
 			Gray = (R*299 + G*587 + B*114 + 500) / 1000;
             if(isColor && i%3==2)
 				Paint_SetPixel(i, j, Gray/2);
