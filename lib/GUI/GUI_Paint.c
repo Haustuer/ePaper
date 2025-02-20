@@ -69,6 +69,11 @@
 #include <string.h> //memset()
 #include <math.h>
 
+//#include "icons.h"
+
+
+
+
 PAINT Paint;
 UBYTE isColor = 0;
 /******************************************************************************
