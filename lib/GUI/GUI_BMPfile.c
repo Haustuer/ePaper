@@ -265,9 +265,11 @@ static void DrawMatrix2(UWORD Xstart, UWORD Ystart, UWORD w, UWORD h ,UWORD Widt
 
 static void DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD *w, UWORD *h ,UWORD Width, UWORD High,const UBYTE* Matrix)
 {
-	*w=62;
-	*h=59;
-
+	
+	int imWidth=62;
+	int imHeight=59;
+	*w=imWidth;
+	*h=imHeight;
 	unsigned int Ship1data[3658] = {
 		16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 14, 14, 14, 14, 9, 10, 7, 5, 14, 14, 14, 16, 16, 16, 16, 16, 16, 
 		16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 14, 14, 13, 14, 14, 16, 16, 16, 16, 16, 16, 
@@ -343,10 +345,10 @@ static void DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD *w, UWORD *h ,UWORD Wi
 			
 
 			Gray = (R*299 + G*587 + B*114 + 500) / 1000;
-				int crazyy=y%62;					
-				int crazyx=x%(*h);			
+				int crazyy=y%imWidth;					
+				int crazyx=x%imHeight;			
 
-				if (Ship1data[crazyy*(*w)+crazyx]!=16){
+				if (Ship1data[crazyy*imWidth+crazyx]!=16){
 					Gray = 0;
 					//Debug("index:%d   y:%d x:%d  w:%d  Pixel: %d\n",yid*w+xid,yid,xid,w, Ship1data[yid*w+xid]);
 					
