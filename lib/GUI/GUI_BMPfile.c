@@ -273,7 +273,7 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Icon ,UWORD Width, UWORD High
 {
 	int iconWidth;
 	int iconHeight;
-	int iconData[];
+	unsigned int iconData[];
 
 	switch (Icon)
 	{
