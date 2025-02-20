@@ -525,6 +525,7 @@ UBYTE Display_Icon( UDOUBLE Init_Target_Memory_Addr ,int x, int y,  int Icon)
    // GUI_ReadBmp3(Path, x, y,Icon);   
     Debug("Function over\n");
     w=mypicsize[0];
+    
    // h=mysize[1];
     free(mypicsize);
     Debug("Exsample After w:%d h:%d\n",w,h);
