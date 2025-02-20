@@ -292,7 +292,7 @@ int main(int argc, char *argv[])
         case 6:     
         
         for (int x=0;x<1400;x+=50){
-            for (int y=0;y<1200;x+=50){
+            for (int y=0;y<1200;y+=50){
                 Debug("x:%d y:%d \n",x,y);
                 Display_BMP_Patch(Init_Target_Memory_Addr, x, y, 159, 101);
 
