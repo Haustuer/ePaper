@@ -305,7 +305,7 @@ int main(int argc, char *argv[])
         for (int x=0;x<1300;x+=200){
             for (int y=0;y<1200;y+=200){
                 Debug("x:%d y:%d \n",x,y);
-                Display_Icon(Init_Target_Memory_Addr,y,x,0);
+                Display_Icon(Init_Target_Memory_Addr,y,x,temp1);
 
         }}
       
