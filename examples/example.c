@@ -12,7 +12,7 @@
 #include "../lib/GUI/GUI_BMPfile.h"
 #include "../lib/Config/Debug.h"
 
-#include "../lib/GUI/icons.h"
+//#include "../lib/GUI/icons.h"
 UBYTE *Refresh_Frame_Buf = NULL;
 
 UBYTE *Panel_Frame_Buf = NULL;
@@ -513,11 +513,11 @@ UBYTE Display_Icon( UDOUBLE Init_Target_Memory_Addr ,int x, int y,  int Icon)
     Icon=0;
 
     
-    int w = BigShip.width;
-    int h = BigShip.height;
+    int w = 62;//BigShip.width;
+    int h = 59;//BigShip.height;
 
 
-    GUI_ReadBmp2(Path, x, y,w,h);   
+    GUI_ReadBmp3(Path, x, y,Icon);   
 
     EPD_IT8951_8bp_Refresh(Refresh_Frame_Buf, x, y, w, h, false, Init_Target_Memory_Addr);
 
