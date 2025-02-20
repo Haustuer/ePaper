@@ -210,6 +210,8 @@ static void DrawMatrix2(UWORD Xstart, UWORD Ystart, UWORD w, UWORD h ,UWORD Widt
 	UBYTE R,G,B;
 	UBYTE temp1,temp2;
 	double Gray;
+	Debug("Draw X:%dY:%d to X*:%dY*:%d\n",Xstart,Ystart,Xstart+w,Ystart+h);
+
 	//Paint_SetSizeMem(w,h);
 	Paint_SetTargetWidth(w);
 	UWORD xid,yid;
