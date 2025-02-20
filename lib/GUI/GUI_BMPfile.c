@@ -278,8 +278,15 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Icon ,UWORD Width, UWORD High
 	Debug(" Draw Icon:%d\n",Icon);	
 	switch (Icon)
 	{
-		case 1:	
-	case 2:
+		case 2:	
+			/* code */
+			iconWidth=Ship2W;
+			iconHeight=Ship2H;		
+			iconData = (unsigned int *)malloc(Ship2W*Ship2H * sizeof(unsigned int));
+			memcpy(iconData, Ship2Data, Ship2W*Ship2H * sizeof(unsigned int));
+			break;
+
+	case 1:
 		/* code */
 		iconWidth=Ship1W;
 		iconHeight=Ship1H;		
