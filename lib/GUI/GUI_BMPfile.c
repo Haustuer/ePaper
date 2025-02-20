@@ -365,7 +365,7 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Width, UWORD High,const UBYTE
 					
 				}
 			
-            if(isColor && i%3==2)
+            if(isColor && i%3==2) 
 				Paint_SetPixel(i, j, Gray/2);
 			else
 				Paint_SetPixel(i, j, Gray);
