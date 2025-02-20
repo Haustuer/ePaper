@@ -276,7 +276,7 @@ int main(int argc, char *argv[])
         break;
         case 4:
 
-                Display_Icon(Init_Target_Memory_Addr,100,200,0);
+                Display_Icon(Init_Target_Memory_Addr,500,1700,0);
         break;
 
         case 5:
