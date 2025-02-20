@@ -281,10 +281,10 @@ int main(int argc, char *argv[])
 
         case 5:
             int y = 0;
-        for (int x = 0; x < 1600; x += 200) {
+        for (int x = 0; x < 1200; x += 180) {
            
         Display_BMP_Patch(Init_Target_Memory_Addr, x, y , 600, 300); 
-        y+=300;        
+        y+=260;        
 
         }
 
