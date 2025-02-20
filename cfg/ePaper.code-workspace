@@ -6,7 +6,8 @@
 	],
 	"settings": {
 		"files.associations": {
-			"debug.h": "c"
+			"debug.h": "c",
+			"gui_bmpfile.h": "c"
 		}
 	}
 }

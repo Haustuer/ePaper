@@ -12,6 +12,7 @@
 #include "../lib/GUI/GUI_BMPfile.h"
 #include "../lib/Config/Debug.h"
 
+#include "../lib/GUIf/icon.h"
 UBYTE *Refresh_Frame_Buf = NULL;
 
 UBYTE *Panel_Frame_Buf = NULL;
