@@ -47,7 +47,7 @@
 #include <math.h>//memset()
 #include <stdio.h>
 
-//#include "icons.h"
+#include "icons.h"
 
 //global variables related to BMP picture display
 UBYTE *bmp_dst_buf = NULL;
@@ -271,7 +271,7 @@ static void DrawMatrix2(UWORD Xstart, UWORD Ystart, UWORD w, UWORD h ,UWORD Widt
 
 
 
-int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Width, UWORD High,const UBYTE* Matrix)
+int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Icon ,UWORD Width, UWORD High,const UBYTE* Matrix)
 {
 	
 	int imWidth=62;
@@ -971,7 +971,7 @@ int* GUI_ReadBmp3(const char *path, UWORD x, UWORD y, UWORD Icon)
 
 
 	//DrawMatrix(x, y,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
-	int* mysize=DrawMatrix3(x, y,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
+	int* mysize=DrawMatrix3(x, y,Icon,InfoHead.biWidth, InfoHead.biHeight, bmp_dst_buf);
 	Debug("After w:%d h:%d\n",w,h);
 	Debug("pointer After w:%d h:%d\n",mysize[0],mysize[1]);
 	/*
