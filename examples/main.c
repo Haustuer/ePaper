@@ -15,7 +15,7 @@
 
 #include <unistd.h>
 
-#include "../lib/GUI/icons.h"
+
 
 UWORD VCOM = 1520;
 IT8951_Dev_Info Dev_Info = {0, 0};
