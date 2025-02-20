@@ -477,7 +477,7 @@ parameter:
 UBYTE Display_Icon( UDOUBLE Init_Target_Memory_Addr ,int x, int y,  int Icon)
 {
     UWORD WIDTH;
-
+    Debug("Display Icon FKT:%d\n",Icon);
     UBYTE BitsPerPixel = BitsPerPixel_8;
   //  UDOUBLE Init_Target_Memory_Addr = Dev_Info.Memory_Addr_L | (Dev_Info.Memory_Addr_H << 16);
     UWORD Panel_Width =  1872;
@@ -509,9 +509,7 @@ UBYTE Display_Icon( UDOUBLE Init_Target_Memory_Addr ,int x, int y,  int Icon)
 
     char Path[30];
     sprintf(Path, "./pic/%dx%d_24.bmp", 1872, 1404);
-
-    Icon=0;
-
+   
     
     int w = 1;//BigShip.width;
     int h = 2;//BigShip.height;
