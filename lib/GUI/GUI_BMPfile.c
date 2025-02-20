@@ -790,7 +790,7 @@ UBYTE GUI_ReadBmp2(const char *path, UWORD x, UWORD y, UWORD w, UWORD h)
 
 
 
-UBYTE GUI_ReadBmp3(const char *path, UWORD x, UWORD y, UWORD Icon)
+int* GUI_ReadBmp3(const char *path, UWORD x, UWORD y, UWORD Icon)
 {
 	//bmp file pointer
 	FILE *fp;
@@ -972,13 +972,19 @@ UBYTE GUI_ReadBmp3(const char *path, UWORD x, UWORD y, UWORD Icon)
 	w=mysize[0];
 	h=mysize[1];
 	Debug("more After w:%d h:%d\n",w,h);
+
+
     free(bmp_src_buf);
     free(bmp_dst_buf);
-
+	free(mysize);
 	bmp_src_buf = NULL;
 	bmp_dst_buf = NULL;
 
 	fclose(fp);
 	
-	return(0);
+	int* picsize = (int*)malloc(2 * sizeof(int));
+	picsize[0]=w;
+	picsize[1]=h;	 
+	 
+	return picsize;
 }

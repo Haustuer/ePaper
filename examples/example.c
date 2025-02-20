@@ -513,12 +513,15 @@ UBYTE Display_Icon( UDOUBLE Init_Target_Memory_Addr ,int x, int y,  int Icon)
     Icon=0;
 
     
-    int w = 62;//BigShip.width;
-    int h = 59;//BigShip.height;
+    int w = 1;//BigShip.width;
+    int h = 2;//BigShip.height;
 
-
-    GUI_ReadBmp3(Path, x, y,Icon);   
-
+    Debug("example befor w:%d h:%d\n",w,h);
+    int* mysize=GUI_ReadBmp3(Path, x, y,Icon);   
+    w=mysize[0];
+    h=mysize[1];
+    free(mysize);
+    Debug("Exsample After w:%d h:%d\n",w,h);
     EPD_IT8951_8bp_Refresh(Refresh_Frame_Buf, x, y, w, h, false, Init_Target_Memory_Addr);
 
     if (Refresh_Frame_Buf != NULL)
@@ -526,6 +529,7 @@ UBYTE Display_Icon( UDOUBLE Init_Target_Memory_Addr ,int x, int y,  int Icon)
         free(Refresh_Frame_Buf);
         Refresh_Frame_Buf = NULL;
     }
+  
 
     return 0;
 }
