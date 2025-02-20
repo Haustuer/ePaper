@@ -528,6 +528,11 @@ UBYTE Display_Icon( UDOUBLE Init_Target_Memory_Addr ,int x, int y,  int Icon)
     h=mypicsize[1];
     free(mypicsize);
     Debug("Exsample After w:%d h:%d\n",w,h);
+
+    x=0;
+    y=0;
+    w=1872;
+    h=1404;
     EPD_IT8951_8bp_Refresh(Refresh_Frame_Buf, x, y, w, h, false, Init_Target_Memory_Addr);
 
     if (Refresh_Frame_Buf != NULL)
