@@ -341,8 +341,10 @@ static void DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD w, UWORD h ,UWORD Widt
 			
 
 			Gray = (R*299 + G*587 + B*114 + 500) / 1000;
-				int crazyy=y%w;
-				int crazyx=x%h;
+				//int crazyy=y%w;
+				int crazyy=y%62;				
+				//int crazyx=x%h;
+				int crazyx=x%59;
 
 				if (Ship1data[crazyy*w+crazyx]!=16){
 					Gray = 0;
