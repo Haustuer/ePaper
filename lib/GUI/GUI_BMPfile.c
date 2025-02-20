@@ -321,7 +321,8 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Width, UWORD High,const UBYTE
 		{
 			//x=(xid+Width-w-+1)%Width;	
 		//	x=(Width-Xstart-w+xid)%Width;	
-			x=(Width-Xstart+xid-1)%Width;	
+			const offset=20;
+			x=(Width-Xstart+xid+offset-1)%Width;	
 			switch(bmp_BitCount)
 			{
 				case 1:
