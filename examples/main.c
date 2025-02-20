@@ -265,8 +265,8 @@ int main(int argc, char *argv[])
                 Display_Icon(Init_Target_Memory_Addr,x,y,icon);
 
                 //Display_BMP_Short2(Init_Target_Memory_Addr,x,y,icon);;
-                Display_BMP_Short2(Init_Target_Memory_Addr, x, y, icon);
-                DEV_Delay_ms(200);
+             //   Display_BMP_Short2(Init_Target_Memory_Addr, x, y, icon);
+              //  DEV_Delay_ms(200);
 
                 // Display_BMP_HST(Panel_Width, Panel_Height, Init_Target_Memory_Addr, BitsPerPixel_4,x,y);
             }
