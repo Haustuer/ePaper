@@ -373,8 +373,8 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Width, UWORD High,const UBYTE
 	}
 	
 	int* mysize = (int*)malloc(2 * sizeof(int));
-	 mysize[0]=imWidth;
-	 mysize[1]=imHeight;	 
+	 mysize[0]=imWidth2;
+	 mysize[1]=imHeight2;	 
 	 
 	return mysize;
 }
