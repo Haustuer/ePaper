@@ -365,7 +365,7 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Width, UWORD High,const UBYTE
 				Paint_SetPixel(i, j, Gray);
 		}
 	}
-	return [imWidth,imHeight];
+	return {imWidth,imHeight};
 }
 
 
