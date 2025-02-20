@@ -269,7 +269,7 @@ static void DrawMatrix2(UWORD Xstart, UWORD Ystart, UWORD w, UWORD h ,UWORD Widt
 
 
 
- DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Width, UWORD High,const UBYTE* Matrix)
+PicSize DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Width, UWORD High,const UBYTE* Matrix)
 {
 	PicSize size;
 	size.w=62;
