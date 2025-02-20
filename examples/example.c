@@ -517,9 +517,9 @@ UBYTE Display_Icon( UDOUBLE Init_Target_Memory_Addr ,int x, int y,  int Icon)
     int h = 2;//BigShip.height;
 
     Debug("example befor w:%d h:%d\n",w,h);
- //   int* mysize=GUI_ReadBmp3(Path, x, y,Icon);   
+    int* mysize=GUI_ReadBmp3(Path, x, y,Icon);   
 
-    GUI_ReadBmp3(Path, x, y,Icon);   
+   // GUI_ReadBmp3(Path, x, y,Icon);   
     Debug("Function over\n");
  //   w=mysize[0];
    // h=mysize[1];
