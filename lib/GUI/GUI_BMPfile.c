@@ -358,10 +358,10 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Width, UWORD High,const UBYTE
 			Gray = (R*299 + G*587 + B*114 + 500) / 1000;
 				int crazyy=yid%imWidth2;					
 				int crazyx=xid%imHeight2;			
-
+				Debug("index:%d   y:%d x:%d  w:%d  \n",crazyy*imWidth2+crazyx,yid,xid,*w );
 				if (Ship2data[crazyy*imWidth2+crazyx]!=16){
 					Gray = 0;
-				//	Debug("index:%d   y:%d x:%d  w:%d  Pixel: %d\n",yid*imWidth+xid,yid,xid,*w, Ship1data[yid*imWidth+xid]);
+				//	
 					
 				}
 			
