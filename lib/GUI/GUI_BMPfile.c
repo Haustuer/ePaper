@@ -293,7 +293,7 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Icon ,UWORD Width, UWORD High
 	iconHeight=SchildiH;
 	iconData = (unsigned int *)malloc(SchildiW*SchildiH * sizeof(unsigned int));
         memcpy(iconData, SchildiData, SchildiW*SchildiH  * sizeof(unsigned int));
-        break
+        break;
 	}
 
 	
