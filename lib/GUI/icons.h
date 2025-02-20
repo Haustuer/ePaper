@@ -1,5 +1,5 @@
-#ifndef __MAPICONS__
-#define __MAPICONS__
+#ifndef __MAPICONS
+#define __MAPICONS
 
 
 // Define a struct for an image
@@ -88,7 +88,7 @@ unsigned int image_75x50[] = {
 };
 */
 
-//MapIcon BigShip = {62, 59, Ship1data};
+ MapIcon BigShip = {62, 59, Ship1data};
 
 /*
 MapIcon SmallShip = {100, 200, image_100x200};  
