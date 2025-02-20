@@ -357,7 +357,7 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Width, UWORD High,const UBYTE
 				break;
 			}
 			
-				const offset=20;
+				const offset=40;
 			Gray = (R*299 + G*587 + B*114 + 500) / 1000;
 				int crazyy=yid%imHeight2;					
 				int crazyx=offset+xid%imWidth2;		
