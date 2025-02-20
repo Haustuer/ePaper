@@ -215,14 +215,14 @@ static void DrawMatrix2(UWORD Xstart, UWORD Ystart, UWORD w, UWORD h ,UWORD Widt
 	UWORD xid,yid;
 	for (yid=0,j=Ypos;yid<(High);yid++,j++)
 	{
- 		y=(Ystart+yid)%High;   // tinkerd
+ 		y=(Ystart+yid);//%High;   // tinkerd
 
 		  
 		for (xid=0,i=Xpos;xid<(Width);xid++,i++)
 		{
 			//x=(xid+Width-w-+1)%Width;	
 		//	x=(Width-Xstart-w+xid)%Width;	
-			x=(Width-Xstart+xid-1)%Width;	  // tinkerd
+			x=(Width-Xstart+xid-1);//%Width;	  // tinkerd
 			switch(bmp_BitCount)
 			{
 				case 1:
