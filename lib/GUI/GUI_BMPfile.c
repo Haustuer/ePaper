@@ -297,7 +297,7 @@ static void DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD *w, UWORD *h ,UWORD Wi
 	UBYTE temp1,temp2;
 	double Gray;
 	//Paint_SetSizeMem(w,h);
-	Paint_SetTargetWidth(w);
+	Paint_SetTargetWidth(imWidth);
 	UWORD xid,yid;
 	for (yid=0,j=Ypos;yid<(High);yid++,j++)
 	{
