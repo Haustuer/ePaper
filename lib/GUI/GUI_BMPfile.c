@@ -976,7 +976,7 @@ int* GUI_ReadBmp3(const char *path, UWORD x, UWORD y, UWORD Icon)
 
     free(bmp_src_buf);
     free(bmp_dst_buf);
-	free(mysize);
+	//free(mysize);  // hmm
 	bmp_src_buf = NULL;
 	bmp_dst_buf = NULL;
 
