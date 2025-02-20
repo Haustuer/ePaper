@@ -798,6 +798,7 @@ UBYTE GUI_ReadBmp2(const char *path, UWORD x, UWORD y, UWORD w, UWORD h)
 
 int* GUI_ReadBmp3(const char *path, UWORD x, UWORD y, UWORD Icon)
 {
+	Debug("GUI Draw Icon:%d\n",Icon);
 	//bmp file pointer
 	FILE *fp;
 	BMPFILEHEADER FileHead;
