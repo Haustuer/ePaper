@@ -289,8 +289,14 @@ int main(int argc, char *argv[])
         }
 
         break;
-        case 6:      
-        Display_BMP_Patch(Init_Target_Memory_Addr, 680, 1180, 159, 101);
+        case 6:     
+        
+        for (int x=0;1600;x+=300){
+            for (int y=0;1200;x+=300){
+                Display_BMP_Patch(Init_Target_Memory_Addr, x, y, 159, 101);
+
+        }}
+      
         break;
 
     case 7:
