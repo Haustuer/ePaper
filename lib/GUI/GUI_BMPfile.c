@@ -321,8 +321,8 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Width, UWORD High,const UBYTE
 		{
 			//x=(xid+Width-w-+1)%Width;	
 		//	x=(Width-Xstart-w+xid)%Width;	
-			const offset=20;
-			x=(Width-Xstart+xid+offset-1)%Width;	
+		
+			x=(Width-Xstart+xid-1)%Width;	
 			switch(bmp_BitCount)
 			{
 				case 1:
@@ -357,10 +357,11 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Width, UWORD High,const UBYTE
 				break;
 			}
 			
-
+				const offset=20;
 			Gray = (R*299 + G*587 + B*114 + 500) / 1000;
 				int crazyy=yid%imHeight2;					
-				int crazyx=xid%imWidth2;			
+				int crazyx=offset+xid%imWidth2;		
+
 				//Debug("index:%d   y:%d x:%d  w:%d  \n",crazyy*imWidth2+crazyx,yid,xid,imWidth2 );
 				if (Ship2data[crazyy*imWidth2+crazyx]!=16){
 					Gray = Ship2data[crazyy*imWidth2+crazyx]*16;
