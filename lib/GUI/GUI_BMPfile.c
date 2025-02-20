@@ -301,7 +301,7 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Icon ,UWORD Width, UWORD High
 	UBYTE temp1,temp2;
 	double Gray;
 	//Paint_SetSizeMem(w,h);
-	Paint_SetTargetWidth(imWidth2+1);
+	Paint_SetTargetWidth(iconWidth+1);
 	UWORD xid,yid;
 	for (yid=0,j=Ypos;yid<(High);yid++,j++)
 	{
@@ -350,12 +350,12 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Icon ,UWORD Width, UWORD High
 			
 				const offset=40;
 			Gray = (R*299 + G*587 + B*114 + 500) / 1000;
-				int crazyy=yid%imHeight2;					
-				int crazyx=offset+xid%imWidth2;		
+				int crazyy=yid%iconHeight;					
+				int crazyx=offset+xid%iconWidth;		
 
 				//Debug("index:%d   y:%d x:%d  w:%d  \n",crazyy*imWidth2+crazyx,yid,xid,imWidth2 );
-				if (Ship2data[crazyy*imWidth2+crazyx]!=16){
-					Gray = Ship2data[crazyy*imWidth2+crazyx]*16;
+				if (iconData[crazyy*iconWidth+crazyx]!=16){
+					Gray = iconData[crazyy*iconWidth+crazyx]*16;
 				//	
 					
 				}
