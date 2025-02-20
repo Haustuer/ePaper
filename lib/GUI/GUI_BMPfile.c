@@ -278,7 +278,8 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Icon ,UWORD Width, UWORD High
 	Debug(" Draw Icon:%d\n",Icon);	
 	switch (Icon)
 	{
-	case 1:
+		case 1:	
+	case 2:
 		/* code */
 		iconWidth=Ship1W;
 		iconHeight=Ship1H;		
@@ -288,7 +289,7 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Icon ,UWORD Width, UWORD High
 
 
 		break;
-	case 2:
+	case 3:
 	default:
 	iconWidth=SchildiW;
 	iconHeight=SchildiH;
