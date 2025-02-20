@@ -293,7 +293,7 @@ int main(int argc, char *argv[])
         x = 0;
         
         y = 0;
-        Display_BMP_Patch(Init_Target_Memory_Addr, x, y, 630, 400);
+        Display_BMP_Patch(Init_Target_Memory_Addr, 680, 1180, 159, 101);
         break;
 
     case 7:
