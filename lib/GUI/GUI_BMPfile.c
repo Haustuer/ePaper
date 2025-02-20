@@ -308,7 +308,7 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Width, UWORD High,const UBYTE
 	UBYTE temp1,temp2;
 	double Gray;
 	//Paint_SetSizeMem(w,h);
-	Paint_SetTargetWidth(imWidth);
+	Paint_SetTargetWidth(imWidth2);
 	UWORD xid,yid;
 	for (yid=0,j=Ypos;yid<(High);yid++,j++)
 	{
@@ -360,7 +360,7 @@ int* DrawMatrix3(UWORD Xstart, UWORD Ystart, UWORD Width, UWORD High,const UBYTE
 				int crazyx=xid%imWidth2;			
 				//Debug("index:%d   y:%d x:%d  w:%d  \n",crazyy*imWidth2+crazyx,yid,xid,imWidth2 );
 				if (Ship2data[crazyy*imWidth2+crazyx]!=16){
-					Gray = 0;
+				//	Gray = 0;
 				//	
 					
 				}
